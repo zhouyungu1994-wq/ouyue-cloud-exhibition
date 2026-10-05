@@ -1,28 +1,105 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>城中有声 · 水木之间</title><link rel="stylesheet" href="./style.css"></head>
-<body><header><a href="./" class="brand">水木之间 <span>生生瓯越</span></a><span class="chapter">第二篇 · 城中有声</span><button id="editToggle" aria-expanded="false" aria-controls="editor">调整画面</button></header>
-<main><div class="heading"><p>一方戏台 · 一城烟火</p><h1 id="title">城中有声</h1><p id="intro"></p></div>
-<section class="stage" id="stage" aria-label="互动戏台">
-<img class="layer" src="./assets/stage.png" alt="朱红与青绿相映的传统戏台，两侧乐师伴奏，台下观众静候">
-<img class="layer actor zhang" src="./assets/zhang.png" alt="红袍张协"><img class="layer actor pinnv" src="./assets/pinnv.png" alt="粉衣贫女"><img class="layer mist" src="./assets/mist.png" alt="">
-<div class="curtain-window"><img class="curtain left" src="./assets/curtain-left.png" alt=""><img class="curtain right" src="./assets/curtain-right.png" alt=""></div>
-<button class="shade" id="reveal" aria-label="点击拉开帷幕，播放唱段"><span>循光而入 · 点击启幕</span></button>
-</section>
-<div class="subtitles" id="subtitles" aria-label="同步字幕"><span id="speaker"></span><span id="line"></span></div>
-<div class="transport"><button id="play">开帘听戏</button><label class="seek"><span id="time">00:00 / --:--</span><input type="range" id="progress" min="0" max="100" step=".1" value="0" aria-label="播放进度" disabled></label><button id="mute" aria-pressed="false">静音</button><button id="reset">合帘重看</button><button id="skip">跳过唱段</button></div>
-<p class="status" id="status" role="status">移动鼠标，循光看戏；也可直接点击启幕。</p>
-<section class="echo" id="echo" hidden tabindex="-1"><p>余音入水</p><h2>戏起一方台，声入一座城。</h2><p>从一段唱腔，听见地方戏曲中的人情与世情。</p><button id="replay">再听一遍</button></section>
-<div class="chapter-note"><span>听 · 见 · 留</span><p>一方戏台连接台上与台下。听一段唱腔，也听见人们共同生活的回声。</p></div>
-<footer>《水木之间·生生瓯越》数字云展 <span id="credit">唱段版本与来源待补充</span></footer></main>
-<aside id="editor" hidden aria-label="画面编辑面板"><div class="editor-head"><h2>调整画面</h2><button id="editClose" aria-label="关闭编辑面板">关闭</button></div><p>修改即时预览；“保存到本机”只影响当前浏览器，不会更新 GitHub。</p>
-<label>章节标题<input id="editTitle" type="text" maxlength="40"></label><label>导入文案<textarea id="editIntro" rows="3" maxlength="160"></textarea></label>
-<label>暗场浓度 <output id="darkValue"></output><input id="dark" type="range" min=".3" max=".95" step=".01"></label>
-<label>光圈大小 <output id="glowValue"></output><input id="glow" type="range" min="40" max="250" step="5"></label>
-<label>开帘时间 <output id="durationValue"></output><input id="duration" type="range" min="1" max="6" step=".1"></label>
-<label>薄雾浓度 <output id="mistValue"></output><input id="mist" type="range" min="0" max=".4" step=".01"></label>
-<label>播放音量 <output id="volumeValue"></output><input id="volume" type="range" min="0" max="1" step=".05"></label>
-<label>人物动作幅度 <output id="motionValue"></output><input id="motion" type="range" min="0" max="1" step=".05"></label>
-<label>演出来源与署名<input id="editCredit" type="text" maxlength="180"></label>
-<label>导入核对后的字幕（.vtt）<input id="subtitleFile" type="file" accept=".vtt,text/vtt"></label><p>字幕行可写“贫女：唱词”或“张协：唱词”，灯光会跟随标注的人物。未导入时不显示虚构唱词。</p>
-<div class="edit-actions"><button id="save">保存到本机</button><button id="export">导出设置</button><button id="defaults">恢复默认</button></div><p id="editStatus" role="status"></p></aside>
-<audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio><noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript><script src="./config.js"></script><script src="./app.js"></script></body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>城中有声 · 水木之间</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header>
+  <a href="./" class="brand">水木之间 <span>生生瓯越</span></a>
+  <span class="chapter">第二篇 · 城中有声</span>
+  <button id="editToggle" aria-expanded="false" aria-controls="editor">调整画面</button>
+</header>
+
+<div class="stage-viewport" id="stageViewport">
+  <div class="stage-box" id="stageBox">
+    <section class="stage" id="stage" aria-label="互动戏台">
+      <img class="layer stage-bg" src="./assets/stage.png" alt="朱红与青绿相映的传统戏台，两侧乐师伴奏，台下观众静候">
+      <svg class="actor rig zhang" viewBox="0 0 360 400" role="img" aria-label="红袍张协，头部和手臂随唱段摆动">
+        <image href="./assets/rig/zhang-body.png" x="30" y="82" width="256.2" height="294"/>
+        <g class="rig-head" style="--pivot:183px 95px"><image href="./assets/rig/zhang-head.png" x="135" y="10" width="93.38" height="101.5"/></g>
+        <g class="rig-arm" style="--pivot:214px 126px"><image href="./assets/rig/zhang-arm.png" x="177" y="93" width="165" height="121.88"/>
+          <g class="rig-sleeve" style="--pivot:299px 133px"><image href="./assets/rig/zhang-sleeve.png" x="272" y="132" width="85.68" height="94.18"/></g>
+        </g>
+      </svg>
+      <svg class="actor rig pinnv" viewBox="0 0 360 400" role="img" aria-label="粉衣贫女，头部和手臂随唱段摆动">
+        <image href="./assets/rig/pinnv-body.png" x="70" y="86" width="272" height="288"/>
+        <g class="rig-head" style="--pivot:218px 94px"><image href="./assets/rig/pinnv-head.png" x="183" y="11" width="86.1" height="108"/></g>
+        <g class="rig-arm" style="--pivot:202px 150px"><image href="./assets/rig/pinnv-arm.png" x="69" y="105" width="149.5" height="122.82"/>
+          <g class="rig-sleeve" style="--pivot:116px 152px"><image href="./assets/rig/pinnv-sleeve.png" x="79" y="150" width="108.72" height="96.12"/></g>
+        </g>
+      </svg>
+      <img class="layer mist" src="./assets/mist.png" alt="">
+      <div class="curtain-window"><img class="curtain left" src="./assets/curtain-left.png" alt=""><img class="curtain right" src="./assets/curtain-right.png" alt=""></div>
+      <button class="shade" id="reveal" aria-label="点击拉开帷幕，播放唱段"><span>循光而入 · 点击启幕</span></button>
+    </section>
+  </div>
+
+  <div class="intro-shade" id="introShade">
+    <div class="intro-content">
+      <p class="intro-kicker">水木之间 · 生生瓯越</p>
+      <p class="intro-tag">第二篇</p>
+      <h2 class="intro-title" id="cardTitle">城中有声</h2>
+      <p class="intro-sub">一方戏台 · 一城烟火</p>
+      <p class="intro-text" id="cardText"></p>
+      <button class="intro-skip" id="introSkip">进入戏台</button>
+    </div>
+  </div>
+
+  <div class="subtitles" id="subtitles" aria-label="同步字幕"><span id="speaker"></span><span id="line"></span></div>
+  <div class="transport">
+    <button id="play">开帘听戏</button>
+    <label class="seek"><span id="time">00:00 / --:--</span><input type="range" id="progress" min="0" max="100" step=".1" value="0" aria-label="播放进度" disabled></label>
+    <button id="mute" aria-pressed="false">静音</button>
+    <button id="reset">合帘重看</button>
+    <button id="skip">跳过唱段</button>
+  </div>
+  <p class="status" id="status" role="status">移动鼠标，循光看戏；也可直接点击启幕。</p>
+</div>
+
+<main>
+  <div class="heading">
+    <p>一方戏台 · 一城烟火</p>
+    <h1 id="title">城中有声</h1>
+    <p id="intro"></p>
+  </div>
+  <section class="echo" id="echo" hidden tabindex="-1">
+    <p>余音入水</p>
+    <h2>戏起一方台，声入一座城。</h2>
+    <p>从一段唱腔，听见地方戏曲中的人情与世情。</p>
+    <button id="replay">再听一遍</button>
+  </section>
+  <div class="chapter-note"><span>听 · 见 · 留</span><p>一方戏台连接台上与台下。听一段唱腔，也听见人们共同生活的回声。</p></div>
+  <footer>《水木之间·生生瓯越》数字云展 <span id="credit">唱段版本与来源待补充</span></footer>
+</main>
+
+<aside id="editor" hidden aria-label="画面编辑面板">
+  <div class="editor-head"><h2>调整画面</h2><button id="editClose" aria-label="关闭编辑面板">关闭</button></div>
+  <p>修改即时预览；“保存到本机”只影响当前浏览器，不会更新 GitHub。</p>
+  <label>章节标题<input id="editTitle" type="text" maxlength="40"></label>
+  <label>导入文案<textarea id="editIntro" rows="3" maxlength="160"></textarea></label>
+  <label>暗场浓度 <output id="darkValue"></output><input id="dark" type="range" min=".3" max=".95" step=".01"></label>
+  <label>光圈大小 <output id="glowValue"></output><input id="glow" type="range" min="40" max="250" step="5"></label>
+  <label>开帘时间 <output id="durationValue"></output><input id="duration" type="range" min="1" max="6" step=".1"></label>
+  <label>薄雾浓度 <output id="mistValue"></output><input id="mist" type="range" min="0" max=".4" step=".01"></label>
+  <label>播放音量 <output id="volumeValue"></output><input id="volume" type="range" min="0" max="1" step=".05"></label>
+  <label>人物动作幅度 <output id="motionValue"></output><input id="motion" type="range" min="0" max="1" step=".05"></label>
+  <label>演出来源与署名<input id="editCredit" type="text" maxlength="180"></label>
+  <label>导入核对后的字幕（.vtt）<input id="subtitleFile" type="file" accept=".vtt,text/vtt"></label>
+  <p>字幕行可写“贫女：唱词”或“张协：唱词”，灯光会跟随标注的人物。未导入时不显示虚构唱词。</p>
+  <div class="edit-actions">
+    <button id="save">保存到本机</button>
+    <button id="export">导出设置</button>
+    <button id="defaults">恢复默认</button>
+  </div>
+  <p id="editStatus" role="status"></p>
+</aside>
+
+<audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio>
+<noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript>
+<script src="./config.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

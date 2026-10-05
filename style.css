@@ -1,4 +1,668 @@
-:root{color-scheme:dark;--paper:#e9dfca;--muted:#ada594;--green:#253f36;--red:#9a352c;--dark:.85;--glow:110px;--duration:2.8s;--mist:.15;--angle:.3deg;--rise:-1px}
-*{box-sizing:border-box}body{margin:0;background:#131c18;color:var(--paper);font-family:"Microsoft YaHei","PingFang SC",sans-serif;background-image:radial-gradient(ellipse at 50% 0%,#31423955,transparent 70%)}button,input,textarea{font:inherit}button{cursor:pointer;color:inherit;background:transparent;border:1px solid #a9956b55;padding:10px 17px;transition:background .2s,border-color .2s}button:hover{background:#ffffff0b;border-color:#cab68a}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #e7c581;outline-offset:5px}button:disabled{opacity:.4;cursor:default}[hidden]{display:none!important}header{max-width:1680px;margin:auto;padding:23px 4vw;display:flex;align-items:center;gap:24px;border-bottom:1px solid #b7a47a22}.brand{color:var(--paper);text-decoration:none;letter-spacing:.25em;font-family:"SimSun",serif;font-size:20px}.brand span{display:block;font-size:10px;letter-spacing:.4em;color:var(--muted);margin-top:8px}.chapter{margin-left:auto;font-size:12px;letter-spacing:.2em;color:var(--muted)}#editToggle{font-size:12px;padding:9px 13px}main{max-width:1600px;margin:auto;padding:0 34px}.heading{text-align:center;padding:42px 0 30px}.heading>p:first-child{font-size:11px;letter-spacing:.5em;color:#c1a16c;margin:0 0 15px}h1{font-family:"STSong","SimSun",serif;font-size:clamp(30px,4vw,52px);font-weight:400;letter-spacing:.3em;margin:0 0 15px;padding-left:.3em}#intro{font-size:13px;color:var(--muted);line-height:1.9;margin:0;letter-spacing:.08em}.stage{position:relative;isolation:isolate;aspect-ratio:16/9;width:100%;overflow:hidden;background:#090b09;box-shadow:0 20px 90px #0007;border:1px solid #c4a26833}.layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.actor{z-index:2;transform-origin:45% 71%;transition:filter 1s;animation:breath 5.5s ease-in-out infinite;animation-play-state:paused}.pinnv{transform-origin:58% 71%;animation-duration:6.2s;animation-delay:-2s}.playing .actor{animation-play-state:running}.stage[data-speaker="贫女"] .zhang,.stage[data-speaker="张协"] .pinnv{filter:brightness(.78)}.stage[data-speaker="贫女"] .pinnv,.stage[data-speaker="张协"] .zhang{filter:brightness(1.1)}@keyframes breath{50%{transform:translateY(var(--rise)) rotate(var(--angle))}}.mist{z-index:3;opacity:var(--mist);animation:drift 15s ease-in-out infinite;animation-play-state:paused}.playing .mist{animation-play-state:running}@keyframes drift{50%{transform:translateX(.4%) scaleX(1.02)}}.curtain-window{position:absolute;z-index:4;left:30.833%;top:27.037%;width:40.52%;height:45.093%;overflow:hidden;pointer-events:none}.curtain{position:absolute;top:0;width:50.6%;height:100%;object-fit:fill;transition:transform var(--duration) cubic-bezier(.42,0,.14,1),opacity var(--duration)}.left{left:0;transform-origin:left}.right{right:0;transform-origin:right}.opened .left{transform:translateX(-98%) scaleX(.1);opacity:0}.opened .right{transform:translateX(98%) scaleX(.1);opacity:0}.shade{position:absolute;inset:0;width:100%;height:100%;z-index:6;border:0;background:radial-gradient(circle var(--glow) at var(--x,50%) var(--y,55%),rgba(0,0,0,.08),rgba(0,0,0,var(--dark)) 100%);transition:opacity 1.8s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5%}.shade:hover{background:radial-gradient(circle var(--glow) at var(--x,50%) var(--y,55%),rgba(0,0,0,.08),rgba(0,0,0,var(--dark)) 100%);border:0}.shade span{font-family:"SimSun",serif;letter-spacing:.35em;font-size:clamp(11px,1.4vw,18px);text-shadow:0 2px 8px #000}.opened .shade{opacity:0;pointer-events:none}.stage:after{content:"";position:absolute;inset:0;z-index:5;background:#09110f;opacity:0;pointer-events:none;transition:opacity 2s}.ended:after{opacity:.4}.subtitles{min-height:58px;display:flex;gap:16px;align-items:center;justify-content:center;text-align:center;padding:12px;line-height:1.6}#speaker{font-size:12px;color:#d7a464}#line{font-family:"SimSun",serif;font-size:19px;letter-spacing:.12em}.transport{display:flex;align-items:center;gap:12px;max-width:1040px;margin:auto;flex-wrap:wrap}.transport button{font-size:12px;border-color:#a9956b33}.transport #play{background:var(--red);border-color:var(--red);min-width:102px}.seek{flex:1;min-width:150px;display:flex;align-items:center;gap:16px}.seek span{font-size:11px;white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums}.seek input{width:100%;accent-color:#bf975d;cursor:pointer}#status{font-size:12px;color:var(--muted);text-align:center;min-height:20px;line-height:1.8;margin:20px 0}.echo{text-align:center;margin:45px auto;padding:40px 20px;border-top:1px solid #a9956b44;border-bottom:1px solid #a9956b44;max-width:860px}.echo>p:first-child{font-size:12px;letter-spacing:.4em;color:#d3a96f}.echo h2{font-family:"SimSun",serif;font-weight:400;font-size:clamp(22px,3vw,32px);letter-spacing:.15em}.echo p{font-size:13px;color:var(--muted);line-height:1.8}.echo button{margin-top:12px}.chapter-note{display:flex;align-items:center;justify-content:center;gap:26px;margin:50px 0;color:var(--muted)}.chapter-note span{color:#c8ad7c;letter-spacing:.2em;white-space:nowrap;font-family:"SimSun",serif}.chapter-note p{font-size:12px;line-height:1.9;max-width:470px}footer{padding:23px 0;border-top:1px solid #b7a47a22;color:#928d80;font-size:10px;line-height:2;display:flex;justify-content:space-between;gap:20px}#editor{position:fixed;right:0;top:0;bottom:0;width:min(390px,100%);overflow-y:auto;z-index:20;background:#213329;box-shadow:-20px 0 80px #0008;padding:24px;border-left:1px solid #a9956b66}.editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.editor-head h2{font-family:"SimSun",serif;font-size:23px;font-weight:400;margin:0}.editor-head button{font-size:12px}#editor p{font-size:12px;line-height:1.8;color:#b8b6a5}#editor label{display:block;font-size:13px;margin-top:23px}#editor input[type=text],#editor textarea{display:block;width:100%;background:#132219;border:1px solid #8e997655;color:#e8dfc9;padding:10px;margin-top:9px;line-height:1.6}#editor input[type=range]{display:block;width:100%;margin-top:12px;accent-color:#d0a15f}#editor input[type=file]{font-size:11px;max-width:100%;margin-top:10px}output{float:right;color:#d8ad73}.edit-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.edit-actions button{font-size:12px}noscript{display:block;padding:20px;text-align:center}
-@media(max-width:700px){header{padding:18px;gap:12px}.brand{font-size:16px}.chapter{display:none}#editToggle{margin-left:auto}main{padding:0 12px}.heading{padding:32px 10px 24px}#intro{font-size:12px}.stage{box-shadow:none}.transport{gap:8px}.transport button{padding:10px 12px}.seek{order:-1;flex-basis:100%;margin-bottom:6px}.subtitles{min-height:65px}#line{font-size:16px}.chapter-note{display:block;text-align:center;margin:35px 12px}.chapter-note p{margin:15px auto}footer{display:block;text-align:center}footer span{display:block;margin-top:7px}.shade span{letter-spacing:.15em}.echo{margin-top:30px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+:root{
+  color-scheme:dark;
+  --paper:#e9dfca;
+  --muted:#ada594;
+  --green:#253f36;
+  --red:#9a352c;
+  --dark:.85;
+  --glow:110px;
+  --duration:2.8s;
+  --mist:.15;
+  --angle:.3deg;
+  --rise:-1px;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#131c18;
+  color:var(--paper);
+  font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+  background-image:radial-gradient(ellipse at 50% 0%,#31423955,transparent 70%);
+}
+
+button,input,textarea{font:inherit}
+
+button{
+  cursor:pointer;
+  color:inherit;
+  background:transparent;
+  border:1px solid #a9956b55;
+  padding:10px 17px;
+  transition:background .2s,border-color .2s;
+}
+button:hover{background:#ffffff0b;border-color:#cab68a}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid #e7c581;
+  outline-offset:5px;
+}
+button:disabled{opacity:.4;cursor:default}
+
+[hidden]{display:none!important}
+
+/* 页头浮于全屏舞台上方 */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:15;
+  margin:auto;
+  padding:16px 4vw;
+  display:flex;
+  align-items:center;
+  gap:24px;
+  background:linear-gradient(to bottom,#0b110eb3,transparent);
+}
+
+.brand{
+  color:var(--paper);
+  text-decoration:none;
+  letter-spacing:.25em;
+  font-family:"SimSun",serif;
+  font-size:20px;
+}
+.brand span{
+  display:block;
+  font-size:10px;
+  letter-spacing:.4em;
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.chapter{
+  margin-left:auto;
+  font-size:12px;
+  letter-spacing:.2em;
+  color:var(--muted);
+}
+
+#editToggle{
+  font-size:12px;
+  padding:9px 13px;
+}
+
+main{
+  max-width:1600px;
+  margin:auto;
+  padding:0 34px;
+}
+
+/* 舞台下展签 */
+.heading{
+  text-align:center;
+  padding:64px 0 26px;
+}
+.heading>p:first-child{
+  font-size:11px;
+  letter-spacing:.5em;
+  color:#c1a16c;
+  margin:0 0 15px;
+}
+
+h1{
+  font-family:"STSong","SimSun",serif;
+  font-size:clamp(30px,4vw,52px);
+  font-weight:400;
+  letter-spacing:.3em;
+  margin:0 0 15px;
+  padding-left:.3em;
+}
+
+#intro{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.9;
+  margin:0;
+  letter-spacing:.08em;
+}
+
+/* 全屏舞台视口：1920×1080 画幅铺满视口；横屏等比填满（cover），竖屏完整保留（contain） */
+.stage-viewport{
+  position:relative;
+  width:100%;
+  height:100vh;
+  height:100dvh;
+  overflow:hidden;
+  background:#090b09;
+}
+
+/* 缩放承载盒：JS 按视口写入精确尺寸，舞台在盒内按 1920×1080 逻辑坐标缩放 */
+.stage-box{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+  aspect-ratio:16/9;
+}
+
+.stage{
+  position:relative;
+  isolation:isolate;
+  width:1920px;
+  height:1080px;
+  overflow:hidden;
+  background:#090b09;
+  transform-origin:top left;
+}
+
+.layer{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+/* 16:9 舞台图原比例铺满 1920×1080 画框，不再左右裁切 */
+.layer.stage-bg,
+.layer.mist{
+  object-fit:cover;
+  object-position:center center;
+}
+
+.actor{
+  z-index:2;
+  transform-origin:45% 71%;
+  transition:filter 1s;
+  animation:breath 5.5s ease-in-out infinite;
+  animation-play-state:paused;
+}
+.pinnv{
+  transform-origin:58% 71%;
+  animation-duration:6.2s;
+  animation-delay:-2s;
+}
+.playing .actor{animation-play-state:running}
+
+.stage[data-speaker="贫女"] .zhang,
+.stage[data-speaker="张协"] .pinnv{filter:brightness(.78)}
+.stage[data-speaker="贫女"] .pinnv,
+.stage[data-speaker="张协"] .zhang{filter:brightness(1.1)}
+
+@keyframes breath{
+  50%{transform:translateY(var(--rise)) rotate(var(--angle))}
+}
+
+.mist{
+  z-index:3;
+  opacity:var(--mist);
+  animation:drift 15s ease-in-out infinite;
+  animation-play-state:paused;
+}
+.playing .mist{animation-play-state:running}
+
+@keyframes drift{
+  50%{transform:translateX(.4%) scaleX(1.02)}
+}
+
+/* 帷幕窗口按 1920×1080 全画幅坐标定位 */
+.curtain-window{
+  position:absolute;
+  z-index:4;
+  left:592px;
+  top:292px;
+  width:778px;
+  height:487px;
+  overflow:hidden;
+  pointer-events:none;
+}
+.curtain{
+  position:absolute;
+  top:0;
+  width:50.6%;
+  height:100%;
+  object-fit:fill;
+  transition:transform var(--duration) cubic-bezier(.42,0,.14,1),opacity var(--duration);
+}
+.left{left:0;transform-origin:left}
+.right{right:0;transform-origin:right}
+.opened .left{transform:translateX(-98%) scaleX(.1);opacity:0}
+.opened .right{transform:translateX(98%) scaleX(.1);opacity:0}
+
+.shade{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:6;
+  border:0;
+  background:radial-gradient(circle var(--glow) at var(--x,50%) var(--y,55%),rgba(0,0,0,.08),rgba(0,0,0,var(--dark)) 100%);
+  transition:opacity 1.8s;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:11%;
+}
+.shade:hover{
+  background:radial-gradient(circle var(--glow) at var(--x,50%) var(--y,55%),rgba(0,0,0,.08),rgba(0,0,0,var(--dark)) 100%);
+  border:0;
+}
+.shade span{
+  font-family:"SimSun",serif;
+  letter-spacing:.35em;
+  font-size:18px;
+  text-shadow:0 2px 8px #000;
+}
+.opened .shade{opacity:0;pointer-events:none}
+
+.stage:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:5;
+  background:#09110f;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 2s;
+}
+.ended:after{opacity:.4}
+
+/* 开篇过渡页：标题卡停留数秒后渐隐，呈现全屏戏台；点击任意处可跳过 */
+.intro-shade{
+  position:absolute;
+  inset:0;
+  z-index:30;
+  background:radial-gradient(ellipse at 50% 42%,#17241d 0%,#090b09 72%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.6s ease;
+}
+.intro-shade.show{
+  opacity:1;
+  pointer-events:auto;
+}
+.intro-content{
+  max-width:680px;
+  padding:40px;
+}
+.intro-shade.show .intro-content{animation:intro-rise 1.2s ease both}
+@keyframes intro-rise{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:none}
+}
+.intro-kicker{
+  font-size:12px;
+  letter-spacing:.5em;
+  padding-left:.5em;
+  color:#c1a16c;
+  margin:0 0 22px;
+}
+.intro-tag{
+  font-size:11px;
+  letter-spacing:.4em;
+  padding-left:.4em;
+  color:var(--muted);
+  margin:0 0 14px;
+}
+.intro-title{
+  font-family:"STSong","SimSun",serif;
+  font-size:clamp(42px,6vw,66px);
+  font-weight:400;
+  letter-spacing:.3em;
+  padding-left:.3em;
+  margin:0 0 18px;
+}
+.intro-sub{
+  font-size:12px;
+  letter-spacing:.45em;
+  padding-left:.45em;
+  color:#c1a16c;
+  margin:0 0 28px;
+}
+.intro-text{
+  font-size:14px;
+  color:var(--muted);
+  line-height:2.1;
+  letter-spacing:.08em;
+  margin:0 0 42px;
+}
+.intro-skip{
+  font-size:12px;
+  letter-spacing:.25em;
+  padding:13px 34px;
+  border-color:#a9956b66;
+}
+
+/* 字幕与播放控件浮于舞台底部 */
+.subtitles{
+  position:absolute;
+  left:50%;
+  bottom:150px;
+  transform:translateX(-50%);
+  z-index:10;
+  width:min(88%,980px);
+  min-height:58px;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  line-height:1.6;
+  pointer-events:none;
+  text-shadow:0 2px 10px #000c;
+}
+#speaker{
+  font-size:12px;
+  color:#d7a464;
+}
+#line{
+  font-family:"SimSun",serif;
+  font-size:19px;
+  letter-spacing:.12em;
+}
+
+.transport{
+  position:absolute;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%);
+  z-index:10;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  width:min(94%,1120px);
+  padding:10px 18px;
+  background:#0c110ee0;
+  border:1px solid #a9956b40;
+  border-radius:999px;
+  backdrop-filter:blur(8px);
+}
+.transport button{
+  font-size:12px;
+  border-color:#a9956b33;
+}
+.transport #play{
+  background:var(--red);
+  border-color:var(--red);
+  min-width:102px;
+}
+
+.seek{
+  flex:1;
+  min-width:150px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.seek span{
+  font-size:11px;
+  white-space:nowrap;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.seek input{
+  width:100%;
+  accent-color:#bf975d;
+  cursor:pointer;
+}
+
+#status{
+  position:absolute;
+  left:50%;
+  bottom:88px;
+  transform:translateX(-50%);
+  z-index:10;
+  width:min(90%,760px);
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+  min-height:20px;
+  line-height:1.8;
+  margin:0;
+  pointer-events:none;
+  text-shadow:0 1px 6px #000d;
+}
+
+.echo{
+  text-align:center;
+  margin:45px auto;
+  padding:40px 20px;
+  border-top:1px solid #a9956b44;
+  border-bottom:1px solid #a9956b44;
+  max-width:860px;
+}
+.echo>p:first-child{
+  font-size:12px;
+  letter-spacing:.4em;
+  color:#d3a96f;
+}
+.echo h2{
+  font-family:"SimSun",serif;
+  font-weight:400;
+  font-size:clamp(22px,3vw,32px);
+  letter-spacing:.15em;
+}
+.echo p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.8;
+}
+.echo button{margin-top:12px}
+
+.chapter-note{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  margin:50px 0;
+  color:var(--muted);
+}
+.chapter-note span{
+  color:#c8ad7c;
+  letter-spacing:.2em;
+  white-space:nowrap;
+  font-family:"SimSun",serif;
+}
+.chapter-note p{
+  font-size:12px;
+  line-height:1.9;
+  max-width:470px;
+}
+
+footer{
+  padding:23px 0;
+  border-top:1px solid #b7a47a22;
+  color:#928d80;
+  font-size:10px;
+  line-height:2;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+#editor{
+  position:fixed;
+  right:0;
+  top:0;
+  bottom:0;
+  width:min(390px,100%);
+  overflow-y:auto;
+  z-index:20;
+  background:#213329;
+  box-shadow:-20px 0 80px #0008;
+  padding:24px;
+  border-left:1px solid #a9956b66;
+}
+.editor-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.editor-head h2{
+  font-family:"SimSun",serif;
+  font-size:23px;
+  font-weight:400;
+  margin:0;
+}
+.editor-head button{font-size:12px}
+#editor p{
+  font-size:12px;
+  line-height:1.8;
+  color:#b8b6a5;
+}
+#editor label{
+  display:block;
+  font-size:13px;
+  margin-top:23px;
+}
+#editor input[type=text],#editor textarea{
+  display:block;
+  width:100%;
+  background:#132219;
+  border:1px solid #8e997655;
+  color:#e8dfc9;
+  padding:10px;
+  margin-top:9px;
+  line-height:1.6;
+}
+#editor input[type=range]{
+  display:block;
+  width:100%;
+  margin-top:12px;
+  accent-color:#d0a15f;
+}
+#editor input[type=file]{
+  font-size:11px;
+  max-width:100%;
+  margin-top:10px;
+}
+output{
+  float:right;
+  color:#d8ad73;
+}
+.edit-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:25px;
+}
+.edit-actions button{font-size:12px}
+
+noscript{
+  display:block;
+  padding:20px;
+  text-align:center;
+}
+
+/* 独立关节动画；旋转中心按素材中的颈部、肩部、手腕校准（1920×1080 全画幅坐标）。 */
+.rig{
+  position:absolute;
+  inset:auto;
+  top:464px;
+  left:714px;
+  width:292px;
+  height:313px;
+  overflow:visible;
+  transform-origin:50% 96%;
+  animation-duration:6.8s;
+}
+.rig.pinnv{
+  top:489px;
+  left:975px;
+  width:284px;
+  height:288px;
+  transform-origin:62% 96%;
+  animation-duration:7.4s;
+}
+
+.rig-head,.rig-arm,.rig-sleeve{
+  transform-box:view-box;
+  transform-origin:var(--pivot);
+  animation-play-state:paused;
+  animation-timing-function:ease-in-out;
+  animation-iteration-count:infinite;
+}
+.rig-head{animation-name:head-sway;animation-duration:4.8s}
+.rig-arm{animation-name:arm-gesture;animation-duration:6.4s}
+.rig-sleeve{animation-name:sleeve-follow;animation-duration:6.4s;animation-delay:-.3s}
+.pinnv .rig-head{animation-duration:5.6s;animation-delay:-1.2s}
+.pinnv .rig-arm,.pinnv .rig-sleeve{animation-duration:7.2s;animation-delay:-2s}
+.playing .rig-head,.playing .rig-arm,.playing .rig-sleeve{animation-play-state:running}
+
+@keyframes head-sway{
+  0%,100%{transform:rotate(0deg)}
+  30%{transform:rotate(calc(var(--head-angle)*-.55))}
+  65%{transform:rotate(var(--head-angle))}
+}
+@keyframes arm-gesture{
+  0%,100%{transform:rotate(0deg)}
+  35%{transform:rotate(calc(var(--arm-angle)*-.7))}
+  72%{transform:rotate(calc(var(--arm-angle)*.35))}
+}
+@keyframes sleeve-follow{
+  0%,100%{transform:rotate(0deg)}
+  40%{transform:rotate(var(--sleeve-angle))}
+  78%{transform:rotate(calc(var(--sleeve-angle)*-.4))}
+}
+
+/* 竖屏：舞台等比完整呈现，字幕与控件回到文档流，过渡页整屏覆盖 */
+.stage-viewport.portrait{
+  height:auto;
+  background:transparent;
+}
+.stage-viewport.portrait .stage-box{
+  position:relative;
+  left:auto;
+  top:auto;
+  transform:none;
+  margin:0 auto;
+}
+.stage-viewport.portrait .intro-shade{position:fixed}
+.stage-viewport.portrait .subtitles{
+  position:static;
+  transform:none;
+  width:auto;
+  margin:14px auto 0;
+}
+.stage-viewport.portrait .transport{
+  position:static;
+  transform:none;
+  width:100%;
+  margin:14px auto 0;
+  border-radius:14px;
+}
+.stage-viewport.portrait #status{
+  position:static;
+  transform:none;
+  width:auto;
+  margin:12px auto;
+}
+
+@media(max-width:700px){
+  header{padding:18px;gap:12px}
+  .brand{font-size:16px}
+  .chapter{display:none}
+  #editToggle{margin-left:auto}
+  main{padding:0 12px}
+  .heading{padding:36px 10px 20px}
+  #intro{font-size:12px}
+  .transport{gap:8px}
+  .transport button{padding:10px 12px}
+  .seek{order:-1;flex-basis:100%;margin-bottom:6px}
+  .subtitles{min-height:65px}
+  #line{font-size:16px}
+  .chapter-note{display:block;text-align:center;margin:35px 12px}
+  .chapter-note p{margin:15px auto}
+  footer{display:block;text-align:center}
+  footer span{display:block;margin-top:7px}
+  .shade span{letter-spacing:.15em}
+  .echo{margin-top:30px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;transition:none!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .rig,.rig-head,.rig-arm,.rig-sleeve{animation:none!important}
+}

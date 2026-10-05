@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const defaults = { title:'城中有声', intro:'隔一重帘，听一段人间。点击启幕，让目光随唱腔停驻。', dark:.85, glow:110, duration:2.8, mist:.15, volume:.75, motion:.5, credit:'唱段版本与来源待补充', cues:[] };
+  const defaults = { title:'城中有声', intro:'隔一重帘，听一段人间。温州乱弹的声腔穿过街巷，落在寻常百姓的日子里。', dark:.85, glow:110, duration:2.8, mist:.15, volume:.75, motion:.5, credit:'唱段版本与来源待补充', cues:[] };
   const limits = {dark:[.3,.95],glow:[40,250],duration:[1,6],mist:[0,.4],volume:[0,1],motion:[0,1]};
   const storageKey='ouyue-city-sound-v1';
   function normalize(value) {
@@ -15,13 +15,15 @@
   const initial=normalize({...defaults,...window.EXHIBITION_CONFIG});
   let config={...initial}, opened=false, opening=false, timer=null, requestId=0;
   try {const saved=localStorage.getItem(storageKey);if(saved)config=normalize(JSON.parse(saved));}catch{}
-  const audio=$('audio'),stage=$('stage');
+  const audio=$('audio'),stage=$('stage'),viewport=$('stageViewport'),box=$('stageBox'),introShade=$('introShade'),introSkip=$('introSkip');
+  const STAGE_W=1920,STAGE_H=1080;
+  let stageScale=1;
   const time=n=>Number.isFinite(n)?`${String(Math.floor(n/60)).padStart(2,'0')}:${String(Math.floor(n%60)).padStart(2,'0')}`:'--:--';
   const status=text=>$('status').textContent=text;
   function applyConfig(syncFields=true) {
-    $('title').textContent=config.title;document.title=config.title+' · 水木之间';$('intro').textContent=config.intro;$('credit').textContent=config.credit;
+    $('title').textContent=config.title;document.title=config.title+' · 水木之间';$('intro').textContent=config.intro;$('credit').textContent=config.credit;const cardTitle=$('cardTitle'),cardText=$('cardText');if(cardTitle)cardTitle.textContent=config.title;if(cardText)cardText.textContent=config.intro;
     const style=document.documentElement.style;
-    style.setProperty('--dark',config.dark);style.setProperty('--glow',config.glow+'px');style.setProperty('--duration',config.duration+'s');style.setProperty('--mist',config.mist);style.setProperty('--angle',(.6*config.motion)+'deg');style.setProperty('--rise',(-2*config.motion)+'px');audio.volume=config.volume;
+    style.setProperty('--dark',config.dark);style.setProperty('--glow',config.glow+'px');style.setProperty('--duration',config.duration+'s');style.setProperty('--mist',config.mist);style.setProperty('--angle',(2*config.motion)+'deg');style.setProperty('--rise',(-4*config.motion)+'px');style.setProperty('--head-angle',(8*config.motion)+'deg');style.setProperty('--arm-angle',(14*config.motion)+'deg');style.setProperty('--sleeve-angle',(10*config.motion)+'deg');audio.volume=config.volume;
     for(const key of Object.keys(limits)) {$(`${key}Value`).textContent=key==='glow'?config[key]+' px':key==='duration'?config[key].toFixed(1)+' 秒':Math.round(config[key]*100)+'%';if(syncFields)$(key).value=config[key];}
     if(syncFields){$('editTitle').value=config.title;$('editIntro').value=config.intro;$('editCredit').value=config.credit;}
     update();
@@ -37,6 +39,29 @@
     stage.classList.toggle('playing',opened&&!audio.paused&&!audio.ended&&!opening);
     const cue=opened&&!opening?config.cues.find(q=>audio.currentTime>=q.start&&audio.currentTime<q.end):null;
     $('speaker').textContent=cue?.speaker||'';$('line').textContent=cue?.text||'';stage.dataset.speaker=cue?.speaker||'';
+  }
+  function fitStage(){
+    if(!viewport||!box)return;
+    const vw=window.innerWidth,vh=window.innerHeight;
+    const portrait=vh>vw;
+    stageScale=portrait?Math.min(vw/STAGE_W,vh/STAGE_H):Math.max(vw/STAGE_W,vh/STAGE_H);
+    box.style.width=`${Math.round(STAGE_W*stageScale)}px`;
+    box.style.height=`${Math.round(STAGE_H*stageScale)}px`;
+    stage.style.transform=`scale(${stageScale})`;
+    viewport.classList.toggle('portrait',portrait);
+  }
+  function endIntro(){
+    if(!introShade)return;
+    clearTimeout(introTimer);
+    introShade.classList.remove('show');
+    setTimeout(()=>{introShade.style.display='none';},1700);
+  }
+  let introTimer=null;
+  function startIntro(){
+    if(!introShade)return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){endIntro();return;}
+    introShade.classList.add('show');
+    introTimer=setTimeout(endIntro,3200);
   }
   async function playAudio(){
     const id=++requestId;
@@ -63,8 +88,11 @@
   $('replay').onclick=()=>{audio.currentTime=0;$('echo').hidden=true;stage.classList.remove('ended');stage.scrollIntoView({block:'center',behavior:'smooth'});playAudio();};
   $('mute').onclick=()=>{audio.muted=!audio.muted;update();};
   $('progress').oninput=()=>{if(Number.isFinite(audio.duration)&&audio.duration>0){audio.currentTime=Number($('progress').value)/100*audio.duration;stage.classList.remove('ended');$('echo').hidden=true;update();}};
-  stage.onpointermove=e=>{if(opened)return;const r=stage.getBoundingClientRect();stage.style.setProperty('--x',(e.clientX-r.left)+'px');stage.style.setProperty('--y',(e.clientY-r.top)+'px');};
+  stage.onpointermove=e=>{if(opened)return;const r=stage.getBoundingClientRect();stage.style.setProperty('--x',((e.clientX-r.left)/stageScale)+'px');stage.style.setProperty('--y',((e.clientY-r.top)/stageScale)+'px');};
   stage.onpointerleave=()=>{stage.style.removeProperty('--x');stage.style.removeProperty('--y');};
+  window.addEventListener('resize',fitStage);
+  if(introSkip)introSkip.onclick=endIntro;
+  if(introShade)introShade.addEventListener('click',endIntro);
   for(const event of ['loadedmetadata','durationchange','timeupdate','play','pause','volumechange'])audio.addEventListener(event,update);
   audio.addEventListener('ended',()=>finish());audio.addEventListener('error',()=>status('音频无法加载；画面仍可预览，请检查音频文件。'));
   const setEditor=show=>{$('editor').hidden=!show;$('editToggle').setAttribute('aria-expanded',String(show));if(show)$('editTitle').focus();else $('editToggle').focus();};
@@ -84,4 +112,6 @@
     }catch{$('editStatus').textContent='未能导入，请检查WEBVTT时间格式和字幕内容。';}
   };
   applyConfig();
+  fitStage();
+  startIntro();
 })();
