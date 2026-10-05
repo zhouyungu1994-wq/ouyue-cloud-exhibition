@@ -17,13 +17,12 @@
   try {const saved=localStorage.getItem(storageKey);if(saved)config=normalize(JSON.parse(saved));}catch{}
   const audio=$('audio'),stage=$('stage'),viewport=$('stageViewport'),box=$('stageBox'),introShade=$('introShade'),introSkip=$('introSkip');
   const STAGE_W=1920,STAGE_H=1080;
-  let stageScale=1;
   const time=n=>Number.isFinite(n)?`${String(Math.floor(n/60)).padStart(2,'0')}:${String(Math.floor(n%60)).padStart(2,'0')}`:'--:--';
   const status=text=>$('status').textContent=text;
   function applyConfig(syncFields=true) {
     $('title').textContent=config.title;document.title=config.title+' · 水木之间';$('intro').textContent=config.intro;$('credit').textContent=config.credit;
     const style=document.documentElement.style;
-    style.setProperty('--dark',config.dark);style.setProperty('--glow',config.glow+'px');style.setProperty('--duration',config.duration+'s');style.setProperty('--mist',config.mist);style.setProperty('--angle',(2*config.motion)+'deg');style.setProperty('--rise',(-4*config.motion)+'px');style.setProperty('--head-angle',(8*config.motion)+'deg');style.setProperty('--arm-angle',(14*config.motion)+'deg');style.setProperty('--sleeve-angle',(10*config.motion)+'deg');audio.volume=config.volume;
+    style.setProperty('--dark',config.dark);style.setProperty('--glow',config.glow+'px');style.setProperty('--duration',config.duration+'s');style.setProperty('--mist',config.mist);style.setProperty('--angle',(.4*config.motion)+'deg');style.setProperty('--rise',(-1*config.motion)+'px');style.setProperty('--head-angle',(3*config.motion)+'deg');style.setProperty('--arm-angle',(6*config.motion)+'deg');audio.volume=config.volume;
     for(const key of Object.keys(limits)) {$(`${key}Value`).textContent=key==='glow'?config[key]+' px':key==='duration'?config[key].toFixed(1)+' 秒':Math.round(config[key]*100)+'%';if(syncFields)$(key).value=config[key];}
     if(syncFields){$('editTitle').value=config.title;$('editIntro').value=config.intro;$('editCredit').value=config.credit;}
     update();
@@ -42,13 +41,13 @@
   }
   function fitStage(){
     if(!viewport||!box)return;
-    const vw=window.innerWidth,vh=window.innerHeight;
+    const vw=viewport.clientWidth,vh=window.innerHeight;
     const portrait=vh>vw;
-    stageScale=portrait?Math.min(vw/STAGE_W,vh/STAGE_H):Math.max(vw/STAGE_W,vh/STAGE_H);
-    box.style.width=`${Math.round(STAGE_W*stageScale)}px`;
-    box.style.height=`${Math.round(STAGE_H*stageScale)}px`;
-    stage.style.transform=`scale(${stageScale})`;
     viewport.classList.toggle('portrait',portrait);
+    const scale=portrait?vw/STAGE_W:Math.min(vw/STAGE_W,viewport.clientHeight/STAGE_H);
+    box.style.width=`${STAGE_W*scale}px`;
+    box.style.height=`${STAGE_H*scale}px`;
+    viewport.scrollLeft=0;viewport.scrollTop=0;
   }
   let introActive=!!introShade, introLeaving=false;
   const introBackground=[...document.querySelectorAll('header, main, #editor, #stageBox, .transport, .subtitles, #status')];
@@ -61,6 +60,7 @@
       introActive=false;
       introBackground.forEach(el=>{el.inert=false;});
       document.body.classList.remove('intro-active');
+      fitStage();
       $('reveal').focus({preventScroll:true});
     };
     setTimeout(complete,matchMedia('(prefers-reduced-motion: reduce)').matches?0:1600);
@@ -101,9 +101,10 @@
   $('replay').onclick=()=>{audio.currentTime=0;$('echo').hidden=true;stage.classList.remove('ended');stage.scrollIntoView({block:'center',behavior:'smooth'});playAudio();};
   $('mute').onclick=()=>{audio.muted=!audio.muted;update();};
   $('progress').oninput=()=>{if(Number.isFinite(audio.duration)&&audio.duration>0){audio.currentTime=Number($('progress').value)/100*audio.duration;stage.classList.remove('ended');$('echo').hidden=true;update();}};
-  stage.onpointermove=e=>{if(opened)return;const r=stage.getBoundingClientRect();stage.style.setProperty('--x',((e.clientX-r.left)/stageScale)+'px');stage.style.setProperty('--y',((e.clientY-r.top)/stageScale)+'px');};
+  stage.onpointermove=e=>{if(opened)return;const r=stage.getBoundingClientRect();stage.style.setProperty('--x',((e.clientX-r.left)/r.width*100)+'%');stage.style.setProperty('--y',((e.clientY-r.top)/r.height*100)+'%');};
   stage.onpointerleave=()=>{stage.style.removeProperty('--x');stage.style.removeProperty('--y');};
   window.addEventListener('resize',fitStage);
+  if(window.ResizeObserver&&viewport)new ResizeObserver(fitStage).observe(viewport);
   if(introSkip)introSkip.onclick=endIntro;
   for(const event of ['loadedmetadata','durationchange','timeupdate','play','pause','volumechange'])audio.addEventListener(event,update);
   audio.addEventListener('ended',()=>finish());audio.addEventListener('error',()=>status('音频无法加载；画面仍可预览，请检查音频文件。'));

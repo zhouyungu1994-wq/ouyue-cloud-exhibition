@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>城中有声 · 水木之间</title>
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="./style.css?v=20261005-center2">
 </head>
 <body>
 <header>
@@ -17,19 +17,27 @@
   <div class="stage-box" id="stageBox">
     <section class="stage" id="stage" aria-label="互动戏台">
       <img class="layer stage-bg" src="./assets/stage.png" alt="朱红与青绿相映的传统戏台，两侧乐师伴奏，台下观众静候">
-      <svg class="actor rig zhang" viewBox="0 0 360 400" role="img" aria-label="红袍张协，头部和手臂随唱段摆动">
-        <image href="./assets/rig/zhang-body.png" x="30" y="82" width="256.2" height="294"/>
-        <g class="rig-head" style="--pivot:183px 95px"><image href="./assets/rig/zhang-head.png" x="135" y="10" width="93.38" height="101.5"/></g>
-        <g class="rig-arm" style="--pivot:214px 126px"><image href="./assets/rig/zhang-arm.png" x="177" y="93" width="165" height="121.88"/>
-          <g class="rig-sleeve" style="--pivot:299px 133px"><image href="./assets/rig/zhang-sleeve.png" x="272" y="132" width="85.68" height="94.18"/></g>
-        </g>
+      <svg class="actor original-rig zhang" viewBox="0 0 1920 1080" role="img" aria-label="红袍张协，原画比例，头部与手臂轻摆">
+        <defs>
+          <image id="zhang-original" href="./assets/zhang.png" width="1920" height="1080"/>
+          <clipPath id="zhang-body-clip" clipPathUnits="userSpaceOnUse"><path clip-rule="evenodd" d="M0 0 H1920 V1080 H0 Z M780,465 L900,465 L900,528 L854,534 L821,534 L780,528 Z M871,536 L985,515 L985,654 L887,654 L869,585 Z"/></clipPath>
+          <clipPath id="zhang-head-clip" clipPathUnits="userSpaceOnUse"><polygon points="780,465 900,465 900,528 854,537 821,537 780,528"/></clipPath>
+          <clipPath id="zhang-arm-clip" clipPathUnits="userSpaceOnUse"><polygon points="867,534 985,515 985,654 884,654 865,585"/></clipPath>
+        </defs>
+        <use href="#zhang-original" clip-path="url(#zhang-body-clip)"/>
+        <g class="rig-arm" style="--pivot:869px 552px"><use href="#zhang-original" clip-path="url(#zhang-arm-clip)"/></g>
+        <g class="rig-head" style="--pivot:841px 532px"><use href="#zhang-original" clip-path="url(#zhang-head-clip)"/></g>
       </svg>
-      <svg class="actor rig pinnv" viewBox="0 0 360 400" role="img" aria-label="粉衣贫女，头部和手臂随唱段摆动">
-        <image href="./assets/rig/pinnv-body.png" x="70" y="86" width="272" height="288"/>
-        <g class="rig-head" style="--pivot:218px 94px"><image href="./assets/rig/pinnv-head.png" x="183" y="11" width="86.1" height="108"/></g>
-        <g class="rig-arm" style="--pivot:202px 150px"><image href="./assets/rig/pinnv-arm.png" x="69" y="105" width="149.5" height="122.82"/>
-          <g class="rig-sleeve" style="--pivot:116px 152px"><image href="./assets/rig/pinnv-sleeve.png" x="79" y="150" width="108.72" height="96.12"/></g>
-        </g>
+      <svg class="actor original-rig pinnv" viewBox="0 0 1920 1080" role="img" aria-label="粉衣贫女，原画比例，头部与手臂轻摆">
+        <defs>
+          <image id="pinnv-original" href="./assets/pinnv.png" width="1920" height="1080"/>
+          <clipPath id="pinnv-body-clip" clipPathUnits="userSpaceOnUse"><path clip-rule="evenodd" d="M0 0 H1920 V1080 H0 Z M1097,493 L1160,493 L1160,537 L1139,551 L1110,550 L1097,539 Z M1010,527 L1070,527 L1105,558 L1103,586 L1077,617 L1077,663 L1008,663 Z"/></clipPath>
+          <clipPath id="pinnv-head-clip" clipPathUnits="userSpaceOnUse"><polygon points="1097,493 1160,493 1160,537 1139,554 1110,553 1097,539"/></clipPath>
+          <clipPath id="pinnv-arm-clip" clipPathUnits="userSpaceOnUse"><polygon points="1010,527 1070,527 1108,555 1106,588 1080,617 1080,663 1008,663"/></clipPath>
+        </defs>
+        <use href="#pinnv-original" clip-path="url(#pinnv-body-clip)"/>
+        <g class="rig-arm" style="--pivot:1103px 570px"><use href="#pinnv-original" clip-path="url(#pinnv-arm-clip)"/></g>
+        <g class="rig-head" style="--pivot:1125px 549px"><use href="#pinnv-original" clip-path="url(#pinnv-head-clip)"/></g>
       </svg>
       <img class="layer mist" src="./assets/mist.png" alt="">
       <div class="curtain-window"><img class="curtain left" src="./assets/curtain-left.png" alt=""><img class="curtain right" src="./assets/curtain-right.png" alt=""></div>
@@ -106,6 +114,6 @@
 <audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio>
 <noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript>
 <script src="./config.js"></script>
-<script src="./app.js"></script>
+<script src="./app.js?v=20261005-center2"></script>
 </body>
 </html>
