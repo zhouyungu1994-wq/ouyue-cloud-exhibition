@@ -21,7 +21,7 @@
   const time=n=>Number.isFinite(n)?`${String(Math.floor(n/60)).padStart(2,'0')}:${String(Math.floor(n%60)).padStart(2,'0')}`:'--:--';
   const status=text=>$('status').textContent=text;
   function applyConfig(syncFields=true) {
-    $('title').textContent=config.title;document.title=config.title+' · 水木之间';$('intro').textContent=config.intro;$('credit').textContent=config.credit;const cardTitle=$('cardTitle'),cardText=$('cardText');if(cardTitle)cardTitle.textContent=config.title;if(cardText)cardText.textContent=config.intro;
+    $('title').textContent=config.title;document.title=config.title+' · 水木之间';$('intro').textContent=config.intro;$('credit').textContent=config.credit;
     const style=document.documentElement.style;
     style.setProperty('--dark',config.dark);style.setProperty('--glow',config.glow+'px');style.setProperty('--duration',config.duration+'s');style.setProperty('--mist',config.mist);style.setProperty('--angle',(2*config.motion)+'deg');style.setProperty('--rise',(-4*config.motion)+'px');style.setProperty('--head-angle',(8*config.motion)+'deg');style.setProperty('--arm-angle',(14*config.motion)+'deg');style.setProperty('--sleeve-angle',(10*config.motion)+'deg');audio.volume=config.volume;
     for(const key of Object.keys(limits)) {$(`${key}Value`).textContent=key==='glow'?config[key]+' px':key==='duration'?config[key].toFixed(1)+' 秒':Math.round(config[key]*100)+'%';if(syncFields)$(key).value=config[key];}
@@ -50,18 +50,31 @@
     stage.style.transform=`scale(${stageScale})`;
     viewport.classList.toggle('portrait',portrait);
   }
+  let introActive=!!introShade, introLeaving=false;
+  const introBackground=[...document.querySelectorAll('header, main, #editor, #stageBox, .transport, .subtitles, #status')];
   function endIntro(){
-    if(!introShade)return;
-    clearTimeout(introTimer);
-    introShade.classList.remove('show');
-    setTimeout(()=>{introShade.style.display='none';},1700);
+    if(!introActive||introLeaving)return;
+    introLeaving=true;
+    introShade.classList.add('leaving');
+    const complete=()=>{
+      introShade.hidden=true;
+      introActive=false;
+      introBackground.forEach(el=>{el.inert=false;});
+      document.body.classList.remove('intro-active');
+      $('reveal').focus({preventScroll:true});
+    };
+    setTimeout(complete,matchMedia('(prefers-reduced-motion: reduce)').matches?0:1600);
   }
-  let introTimer=null;
   function startIntro(){
     if(!introShade)return;
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){endIntro();return;}
+    introBackground.forEach(el=>{el.inert=true;});
+    document.body.classList.add('intro-active');
     introShade.classList.add('show');
-    introTimer=setTimeout(endIntro,3200);
+    introSkip.focus({preventScroll:true});
+    introShade.addEventListener('keydown',e=>{
+      if(e.key==='Tab'){e.preventDefault();introSkip.focus();}
+      if(e.key==='Escape')endIntro();
+    });
   }
   async function playAudio(){
     const id=++requestId;
@@ -70,7 +83,7 @@
     update();
   }
   function openCurtain(){
-    if(opened)return;
+    if(introActive||opened)return;
     opened=true;opening=true;$('echo').hidden=true;stage.classList.remove('ended');stage.classList.add('opened');$('reveal').disabled=true;
     status('帷幕渐启，请稍候。');update();
     timer=setTimeout(()=>{opening=false;timer=null;playAudio();},matchMedia('(prefers-reduced-motion: reduce)').matches?0:config.duration*1000);
@@ -92,7 +105,6 @@
   stage.onpointerleave=()=>{stage.style.removeProperty('--x');stage.style.removeProperty('--y');};
   window.addEventListener('resize',fitStage);
   if(introSkip)introSkip.onclick=endIntro;
-  if(introShade)introShade.addEventListener('click',endIntro);
   for(const event of ['loadedmetadata','durationchange','timeupdate','play','pause','volumechange'])audio.addEventListener(event,update);
   audio.addEventListener('ended',()=>finish());audio.addEventListener('error',()=>status('音频无法加载；画面仍可预览，请检查音频文件。'));
   const setEditor=show=>{$('editor').hidden=!show;$('editToggle').setAttribute('aria-expanded',String(show));if(show)$('editTitle').focus();else $('editToggle').focus();};

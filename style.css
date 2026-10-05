@@ -260,12 +260,13 @@ h1{
 }
 .ended:after{opacity:.4}
 
-/* 开篇过渡页：标题卡停留数秒后渐隐，呈现全屏戏台；点击任意处可跳过 */
+/* 剧情引言：读完后点击进入，淡出至闭合帷幕。 */
+body.intro-active{overflow:hidden}
 .intro-shade{
-  position:absolute;
+  position:fixed;
   inset:0;
-  z-index:30;
-  background:radial-gradient(ellipse at 50% 42%,#17241d 0%,#090b09 72%);
+  z-index:100;
+  background:radial-gradient(ellipse at 12% 80%,#502820 0%,transparent 55%),radial-gradient(ellipse at 78% 20%,#294438 0%,#101c18 75%);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -273,16 +274,25 @@ h1{
   opacity:0;
   pointer-events:none;
   transition:opacity 1.6s ease;
+  overflow-y:auto;
 }
+.intro-shade[hidden]{display:none}
+.intro-shade.leaving{opacity:0;pointer-events:auto}
 .intro-shade.show{
   opacity:1;
   pointer-events:auto;
 }
+.intro-shade.show.leaving{opacity:0}
 .intro-content{
-  max-width:680px;
-  padding:40px;
+  width:min(100%,800px);
+  margin:auto;
+  padding:48px 24px;
 }
-.intro-shade.show .intro-content{animation:intro-rise 1.2s ease both}
+.intro-content>*{animation:intro-rise 1s ease both}
+.intro-content .intro-title{animation-delay:.2s}
+.intro-content .intro-sub{animation-delay:.4s}
+.intro-content .intro-text{animation-delay:.65s}
+.intro-content .intro-note,.intro-content .intro-skip,.intro-content .intro-hint{animation-delay:1s}
 @keyframes intro-rise{
   from{opacity:0;transform:translateY(16px)}
   to{opacity:1;transform:none}
@@ -303,10 +313,10 @@ h1{
 }
 .intro-title{
   font-family:"STSong","SimSun",serif;
-  font-size:clamp(42px,6vw,66px);
+  font-size:clamp(26px,4vw,48px);
   font-weight:400;
-  letter-spacing:.3em;
-  padding-left:.3em;
+  letter-spacing:.12em;
+  padding-left:.12em;
   margin:0 0 18px;
 }
 .intro-sub{
@@ -317,12 +327,18 @@ h1{
   margin:0 0 28px;
 }
 .intro-text{
-  font-size:14px;
-  color:var(--muted);
+  font-size:clamp(15px,1.4vw,18px);
+  color:#e6dbc5;
   line-height:2.1;
   letter-spacing:.08em;
-  margin:0 0 42px;
+  margin:24px 0;
 }
+.intro-text p{margin:14px 0}
+.intro-note,.intro-hint{font-size:12px;color:#c4bba7;letter-spacing:.06em}
+.intro-note{margin-bottom:28px}
+.intro-hint{margin-top:18px}
+.intro-skip:focus-visible{outline:2px solid #e6dbc5;outline-offset:5px}
+@media(max-width:600px){.intro-break{display:none}.intro-sub{letter-spacing:.12em}.intro-kicker{letter-spacing:.2em}}
 .intro-skip{
   font-size:12px;
   letter-spacing:.25em;
