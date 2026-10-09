@@ -464,25 +464,91 @@ body.intro-active{overflow:hidden}
 }
 .echo button{margin-top:12px}
 
-.chapter-note{
+.opera-notes{
+  max-width:980px;
+  margin:64px auto 56px;
+  padding:34px clamp(20px,5vw,58px);
+  border-top:1px solid #a9956b44;
+  border-bottom:1px solid #a9956b44;
+  background:linear-gradient(120deg,#253f361c,transparent 70%);
+}
+.opera-notes-kicker,.opera-card-label{
+  margin:0 0 12px;
+  color:#d3a96f;
+  font-size:11px;
+  letter-spacing:.35em;
+}
+.opera-notes h2{
+  margin:0 0 14px;
+  font-family:"SimSun",serif;
+  font-size:clamp(22px,3vw,30px);
+  font-weight:400;
+  letter-spacing:.14em;
+}
+.opera-notes-lead,.opera-more-intro{
+  max-width:790px;
+  margin:0;
+  color:#c3bdad;
+  font-size:13px;
+  line-height:2;
+  letter-spacing:.03em;
+}
+.opera-more{margin-top:21px}
+.opera-more summary{
   display:flex;
   align-items:center;
-  justify-content:center;
-  gap:26px;
-  margin:50px 0;
-  color:var(--muted);
-}
-.chapter-note span{
-  color:#c8ad7c;
-  letter-spacing:.2em;
-  white-space:nowrap;
-  font-family:"SimSun",serif;
-}
-.chapter-note p{
+  justify-content:space-between;
+  gap:18px;
+  width:max-content;
+  min-width:178px;
+  padding:11px 16px;
+  border:1px solid #a9956b66;
+  color:#e6dbc5;
+  cursor:pointer;
+  list-style:none;
   font-size:12px;
-  line-height:1.9;
-  max-width:470px;
+  letter-spacing:.12em;
+  transition:background .2s,border-color .2s;
 }
+.opera-more summary::-webkit-details-marker{display:none}
+.opera-more summary:hover{background:#ffffff0b;border-color:#cab68a}
+.opera-more summary:focus-visible{outline:2px solid #e7c581;outline-offset:5px}
+.opera-more summary span{color:#d3a96f;font-size:16px;transition:transform .2s}
+.opera-more[open] summary span{transform:rotate(45deg)}
+.opera-more-content{padding-top:19px}
+.opera-more-intro{margin-bottom:17px}
+.opera-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.opera-card{
+  padding:18px 20px;
+  border:1px solid #a9956b30;
+  background:#0c110e66;
+}
+.opera-card-featured{border-color:#c1a16c88;background:linear-gradient(120deg,#9a352c22,#253f3622)}
+.opera-card h3{
+  margin:0 0 8px;
+  color:#e2c792;
+  font-family:"SimSun",serif;
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:.08em;
+}
+.opera-card p:not(.opera-card-label){margin:0;color:#bdb7a8;font-size:12px;line-height:1.9}
+.opera-card .opera-card-label{font-size:10px;letter-spacing:.18em}
+.opera-note-caveat{margin:13px 0 0;color:#928d80;font-size:10px;line-height:1.8}
+.opera-sources{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 16px;
+  align-items:baseline;
+  margin-top:17px;
+  padding-top:13px;
+  border-top:1px solid #a9956b22;
+  font-size:10px;
+  line-height:1.8;
+}
+.opera-sources span{color:#c8ad7c;white-space:nowrap}
+.opera-sources a{color:#aaa28e;text-decoration-color:#a9956b55;text-underline-offset:3px}
+.opera-sources a:hover{color:#e6dbc5}
 
 footer{
   padding:23px 0;
@@ -678,8 +744,10 @@ noscript{
   .seek{order:-1;flex-basis:100%;margin-bottom:6px}
   .subtitles{min-height:65px}
   #line{font-size:16px}
-  .chapter-note{display:block;text-align:center;margin:35px 12px}
-  .chapter-note p{margin:15px auto}
+  .opera-notes{margin:38px auto 34px;padding:25px 18px}
+  .opera-grid{grid-template-columns:1fr}
+  .opera-card{padding:16px}
+  .opera-more summary{width:100%;justify-content:space-between}
   footer{display:block;text-align:center}
   footer span{display:block;margin-top:7px}
   .shade span{letter-spacing:.15em}
