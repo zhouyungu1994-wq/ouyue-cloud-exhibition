@@ -472,6 +472,34 @@ body.intro-active{overflow:hidden}
   border-bottom:1px solid #a9956b44;
   background:linear-gradient(120deg,#253f361c,transparent 70%);
 }
+.opera-dialog{
+  width:min(1040px,calc(100% - 32px));
+  max-width:none;
+  max-height:90dvh;
+  margin:auto;
+  padding:clamp(16px,3vw,30px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  border:1px solid #a9956b88;
+  background:#131c18;
+  color:var(--paper);
+  box-shadow:0 24px 90px #000b;
+}
+.opera-dialog::backdrop{background:#050906c9;backdrop-filter:blur(5px)}
+.opera-dialog-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  border-bottom:1px solid #a9956b33;
+  padding-bottom:12px;
+}
+.opera-dialog-head p{margin:0;color:#c8ad7c;font-size:11px;letter-spacing:.2em}
+.opera-dialog-head form{margin:0}
+.opera-dialog-head button{font-size:11px;padding:8px 13px}
+.opera-dialog .opera-notes{max-width:none;margin:0;padding:25px 0 0;border:0;background:none}
+.opera-dialog .opera-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+#openOperaNotes{margin:12px 8px 0}
 .opera-notes-kicker,.opera-card-label{
   margin:0 0 12px;
   color:#d3a96f;
@@ -494,7 +522,7 @@ body.intro-active{overflow:hidden}
   letter-spacing:.03em;
 }
 .opera-more{margin-top:21px}
-.opera-more summary{
+.opera-more>summary{
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -510,20 +538,49 @@ body.intro-active{overflow:hidden}
   letter-spacing:.12em;
   transition:background .2s,border-color .2s;
 }
-.opera-more summary::-webkit-details-marker{display:none}
-.opera-more summary:hover{background:#ffffff0b;border-color:#cab68a}
-.opera-more summary:focus-visible{outline:2px solid #e7c581;outline-offset:5px}
+.opera-more>summary::-webkit-details-marker{display:none}
+.opera-more>summary:hover{background:#ffffff0b;border-color:#cab68a}
+.opera-more>summary:focus-visible{outline:2px solid #e7c581;outline-offset:5px}
 .opera-more>summary>span{color:#d3a96f;font-size:16px;transition:transform .2s}
 .opera-more[open]>summary>span{transform:rotate(45deg)}
-.opera-more-content{padding-top:19px}
+.opera-more-content{min-width:0;padding-top:19px}
 .opera-more-intro{margin-bottom:17px}
-.opera-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.opera-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;min-width:0}
 .opera-card{
-  padding:18px 20px;
+  min-width:0;
   border:1px solid #a9956b30;
   background:#0c110e66;
 }
 .opera-card-featured{border-color:#c1a16c88;background:linear-gradient(120deg,#9a352c22,#253f3622)}
+.opera-card summary{
+  display:block;
+  width:auto;
+  min-width:0;
+  padding:18px 20px;
+  border:0;
+  color:inherit;
+  font-size:inherit;
+  letter-spacing:normal;
+  cursor:pointer;
+  list-style:none;
+}
+.opera-card summary::-webkit-details-marker{display:none}
+.opera-card summary:focus-visible{outline:2px solid #e7c581;outline-offset:4px}
+.opera-card summary:hover .opera-card-action{color:#f0d59f}
+.opera-card-action{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:14px;
+  color:#c8ad7c;
+  font-size:10px;
+  letter-spacing:.12em;
+}
+.opera-card-action span{font-size:15px;transition:transform .2s}
+.opera-card[open] .opera-card-action span{transform:rotate(45deg)}
+.opera-card-detail{padding:0 20px 18px;border-top:1px solid #a9956b22}
+.opera-card-source{display:inline-block;margin-top:12px;color:#c8ad7c;font-size:10px;line-height:1.8;text-underline-offset:3px}
 .opera-card h3{
   margin:0 0 8px;
   color:#e2c792;
@@ -746,8 +803,12 @@ noscript{
   #line{font-size:16px}
   .opera-notes{margin:38px auto 34px;padding:25px 18px}
   .opera-grid{grid-template-columns:1fr}
-  .opera-card{padding:16px}
-  .opera-more summary{width:100%;justify-content:space-between}
+  .opera-dialog .opera-grid{grid-template-columns:1fr}
+  .opera-dialog{width:calc(100% - 20px);max-height:92dvh;padding:15px}
+  .opera-dialog .opera-notes{padding-top:18px}
+  .opera-card summary{padding:16px}
+  .opera-card-detail{padding:0 16px 16px}
+  .opera-more>summary{width:100%;justify-content:space-between}
   footer{display:block;text-align:center}
   footer span{display:block;margin-top:7px}
   .shade span{letter-spacing:.15em}
