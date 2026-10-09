@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>城中有声 · 水木之间</title>
-<link rel="stylesheet" href="./style.css?v=20261010-city-sound-redesign1">
+<link rel="stylesheet" href="./style.css?v=20261010-city-sound-redesign2">
 </head>
 <body>
 <header>
@@ -46,6 +46,16 @@
     </section>
   </div>
 
+  <aside class="character-guide" id="characterGuide" aria-label="人物线索" hidden>
+    <p class="character-guide-kicker">听戏看人 · 点击人物线索</p>
+    <div class="character-guide-choices">
+      <button type="button" class="character-choice" data-character="贫女" aria-pressed="false">贫女</button>
+      <button type="button" class="character-choice" data-character="张协" aria-pressed="false">张协</button>
+    </div>
+    <p class="character-guide-story" id="characterStory" aria-live="polite">选一位人物，看看这出戏如何写人情与世情。</p>
+    <a class="character-guide-source" href="https://www.neac.gov.cn/seac/xwzx/202601/1186679.shtml" target="_blank" rel="noopener noreferrer">剧情线索据剧目故事整理 · 非录音唱词 ↗</a>
+  </aside>
+
   <div class="intro-shade show" id="introShade" role="dialog" aria-modal="true" aria-labelledby="cardTitle" aria-describedby="cardText">
     <div class="intro-content">
       <p class="intro-kicker">水木之间 · 生生瓯越</p>
@@ -53,7 +63,7 @@
       <h2 class="intro-title" id="cardTitle">城中有声</h2>
       <p class="intro-sub">一方戏台 · 一城烟火</p>
       <div class="intro-text" id="cardText">
-        <p>从一段南戏唱腔出发，<br class="intro-break">听见温州城里的故事如何流传。</p>
+        <p>从《张协状元》的故事出发，<br class="intro-break">听见温州城里的戏如何流传。</p>
         <p>先听戏，再沿着戏文、旧物与当代舞台，走近南戏的来路。</p>
       </div>
       <button class="intro-skip" id="introSkip">入席听戏 <span aria-hidden="true">→</span></button>
@@ -97,22 +107,21 @@
       <button class="archive-stop" id="tab-today" role="tab" aria-selected="false" aria-controls="panel-today" data-panel="panel-today" tabindex="-1"><span>03</span><b>今日回响</b><small>南戏与瓯剧、永昆</small></button>
     </div>
     <div class="archive-panel is-active" id="panel-origin" role="tabpanel" aria-labelledby="tab-origin">
-      <div class="archive-index">01 <i>起声</i></div><div><h3>从温州的书会与市井而来</h3><p>南戏又称“温州杂剧”“永嘉杂剧”。浙江社科网转载的研究采访将其概括为北宋末至元末明初在南方兴起的戏曲形式；南宋温州九山书会是戏曲才人组成的创作组织，《张协状元》与之相关。此处展示的是文献所述的文化脉络，不对具体宋代演出场地作复原。</p><p class="archive-prompt">互动提示：点开下方剧目，看看这些故事如何把离散、守信、团圆与劝善带上舞台。</p></div>
+      <div class="archive-index">01 <i>起声</i></div><div><h3>从温州的书会与市井而来</h3><p>南戏又称“温州杂剧”“永嘉杂剧”。浙江社科网转载的研究采访将其概括为北宋末至元末明初在南方兴起的戏曲形式；南宋温州九山书会是戏曲才人组成的创作组织，《张协状元》与之相关。此处展示的是文献所述的文化脉络，不对具体宋代演出场地作复原。</p><a class="archive-source" href="https://www.zjskw.gov.cn/art/2023/10/25/art_1229711390_55099.html" target="_blank" rel="noopener noreferrer">查看南戏与温州的资料 ↗</a><p class="archive-prompt">互动提示：点开下方剧目，看看这些故事如何把离散、守信、团圆与劝善带上舞台。</p></div>
     </div>
     <div class="archive-panel" id="panel-script" role="tabpanel" aria-labelledby="tab-script" hidden>
-      <div class="archive-index">02 <i>留存</i></div><div><h3>一部戏文，穿过了抄写与演出</h3><p>《张协状元》被研究者视为现存最早、保存较完整的南戏剧本之一。它的传承并非一座古戏台原封不动地留到今天，而是由文本、后世改编、演出和研究共同延续。</p><p>温州博物馆还介绍过一件清代《张协状元》题材石雕构件。它是后世观看、表现这出戏的实物线索，年代为清代，不能当作宋代舞台遗迹。</p><a class="archive-source" href="https://www.wzmuseum.cn/Art/Art_18/Art_18_2344.aspx" target="_blank" rel="noopener noreferrer">查看温州博物馆藏品介绍 ↗</a></div>
+      <div class="archive-index">02 <i>留存</i></div><div><h3>一部戏文，穿过了抄写与演出</h3><p>《永乐大典》本《张协状元》被研究者视为现存最早的南戏剧本。它的传承并非一座古戏台原封不动地留到今天，而是由文本、后世改编、演出和研究共同延续。</p><figure class="archive-evidence"><blockquote>《永乐大典》本<br>《张协状元》</blockquote><figcaption>文献线索示意排版 · 并非原件影印</figcaption></figure><a class="archive-source" href="https://www.cp.com.cn/book/4acaa1b5-3.html" target="_blank" rel="noopener noreferrer">查看商务印书馆的剧本研究介绍 ↗</a><p>温州博物馆还介绍过一件清代《张协状元》题材石雕构件。它是后世观看、表现这出戏的实物线索，年代为清代，不能当作宋代舞台遗迹。</p><a class="archive-source" href="https://www.wzmuseum.cn/Art/Art_18/Art_18_2344.aspx" target="_blank" rel="noopener noreferrer">查看温州博物馆藏品介绍 ↗</a></div>
     </div>
     <div class="archive-panel" id="panel-today" role="tabpanel" aria-labelledby="tab-today" hidden>
-      <div class="archive-index">03 <i>回响</i></div><div><h3>南戏是源流，瓯剧是后来的地方剧种</h3><p>南戏与瓯剧有关联，但不能直接画等号。瓯剧原名“温州乱弹”，形成于明末清初，1959年定名“瓯剧”，以多种声腔演唱；它吸收、改编南戏剧目，让古老戏文在新的剧种、舞台与观众中继续生活。</p><p>永嘉昆剧（永昆）也以当代演出重新排演《张协状元》。这段唱腔若来自现代演出，应以具体录音版本和演出团体标注；数字戏台插画则是本展的当代视觉表达。</p></div>
+      <div class="archive-index">03 <i>回响</i></div><div><h3>南戏是源流，瓯剧是后来的地方剧种</h3><p>南戏与瓯剧有关联，但不能直接画等号。瓯剧原名“温州乱弹”，形成于明末清初，1959年定名“瓯剧”，以多种声腔演唱；它吸收、改编南戏剧目，让古老戏文在新的剧种、舞台与观众中继续生活。</p><p>永嘉昆剧（永昆）也以当代演出重新排演《张协状元》。这段唱腔若来自现代演出，应以具体录音版本和演出团体标注；数字戏台插画则是本展的当代视觉表达。</p><a class="archive-source" href="https://wzszw.wenzhou.gov.cn/module/download/downfile.jsp?classid=0&amp;filename=d95bf62c9baf4442867a1ade4e326cf9.pdf" target="_blank" rel="noopener noreferrer">温州年鉴：瓯剧沿革 ↗</a><br><a class="archive-source" href="https://www.neac.gov.cn/seac/xwzx/202601/1186679.shtml" target="_blank" rel="noopener noreferrer">当代瓯剧《张协状元》演出介绍 ↗</a></div>
     </div>
     <section class="repertoire" aria-labelledby="repertoireTitle">
-      <div class="repertoire-head"><div><p class="archive-kicker">第三站 · 戏中人</p><h3 id="repertoireTitle">从《张协状元》继续读</h3></div><p>先选四大南戏中的一出；再多读一部《琵琶记》，看见南戏故事的另一条脉络。</p></div>
+      <div class="repertoire-head"><div><p class="archive-kicker">第三站 · 戏中人</p><h3 id="repertoireTitle">从《张协状元》继续读</h3></div><p>四部戏文，四种人情。点开一出，看看戏里人怎样做选择。</p></div>
       <div class="play-list">
         <details class="play-entry" open><summary><span class="play-number">A</span><span class="play-name">《荆钗记》</span><span class="play-hook">一支荆钗，见证守信与离合</span><span class="play-mark">＋</span></summary><div class="play-detail"><p>温州士子王十朋与钱玉莲以荆钗为信物订亲。故事围绕婚约、权势阻挠与误会展开，经历波折后夫妻重逢。荆钗既是信物，也是全剧故事推进的关键。</p><a href="https://www.zjskw.gov.cn/art/2023/10/25/art_1229711390_55099.html" target="_blank" rel="noopener noreferrer">浙江社科网：南戏经典剧目介绍 ↗</a></div></details>
         <details class="play-entry"><summary><span class="play-number">B</span><span class="play-name">《白兔记》</span><span class="play-hook">白兔引路，母子多年后相逢</span><span class="play-mark">＋</span></summary><div class="play-detail"><p>刘知远与李三娘离散多年，儿子咬脐郎追逐白兔来到井边，与正在汲水的母亲相遇，白兔由此牵起寻亲团圆的故事。不同传本的情节和称谓可能有差异。</p><a href="https://openmuseum.tw/muse/digi_object/5ab29169cc0336867167cb8daf432422" target="_blank" rel="noopener noreferrer">台湾音乐馆开放博物馆：剧目故事 ↗</a></div></details>
         <details class="play-entry"><summary><span class="play-number">C</span><span class="play-name">《拜月亭》</span><span class="play-hook">战乱相遇，离散中祈盼团圆</span><span class="play-mark">＋</span></summary><div class="play-detail"><p>蒋世隆与王瑞兰在战乱中相遇，患难相依，却又因门第和误会分离。拜月祈愿成为戏中情感的寄托，故事最终走向重逢。该剧也有《幽闺记》等异名。</p><a href="https://pedia.cloud.edu.tw/Entry/Detail/?search=%E6%8B%9C%E6%9C%88%E4%BA%AD&amp;title=%E6%8B%9C%E6%9C%88%E4%BA%AD" target="_blank" rel="noopener noreferrer">台湾教育部教育百科：剧目介绍 ↗</a></div></details>
         <details class="play-entry"><summary><span class="play-number">D</span><span class="play-name">《杀狗记》</span><span class="play-hook">一场设局，辨出朋友与手足</span><span class="play-mark">＋</span></summary><div class="play-detail"><p>杨氏以假“尸体”设局劝诫沉迷酒友的丈夫孙华。朋友推托，弟弟孙荣前来相助，孙华因此看清情义、与弟弟和好。此处按传统故事梗概转述，版本可能有异。</p><a href="https://kotobank.jp/word/%E6%AE%BA%E7%8B%97%E8%A8%98-69166" target="_blank" rel="noopener noreferrer">小学馆《日本大百科全书》：剧目条目 ↗</a></div></details>
-        <details class="play-entry play-entry-extra"><summary><span class="play-number">＋</span><span class="play-name">《琵琶记》</span><span class="play-hook">四大南戏之外的延伸阅读</span><span class="play-mark">＋</span></summary><div class="play-detail"><p>瑞安人高明据长期流传的戏文改编创作《琵琶记》，以蔡伯喈、赵五娘的故事展开双线叙事。它常被称为“南戏之祖”，是理解南戏发展与文人创作的重要一环；它不属于“荆、刘、拜、杀”四大南戏。</p><a href="https://www.zjskw.gov.cn/art/2023/10/25/art_1229711390_55099.html" target="_blank" rel="noopener noreferrer">浙江社科网：高明与《琵琶记》 ↗</a></div></details>
       </div>
       <p class="repertoire-note">传统戏文在流传、改编与不同剧种演出中会出现异文；以上为便于入门的故事提要。</p>
     </section>
@@ -147,6 +156,6 @@
 <audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio>
 <noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript>
 <script src="./config.js"></script>
-<script src="./app.js?v=20261010-city-sound-redesign1"></script>
+<script src="./app.js?v=20261010-city-sound-redesign2"></script>
 </body>
 </html>

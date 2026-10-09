@@ -16,6 +16,11 @@
   let config={...initial}, opened=false, opening=false, timer=null, requestId=0;
   try {const saved=localStorage.getItem(storageKey);if(saved)config=normalize(JSON.parse(saved));}catch{}
   const audio=$('audio'),stage=$('stage'),viewport=$('stageViewport'),box=$('stageBox'),introShade=$('introShade'),introSkip=$('introSkip');
+  const characterChoices=[...document.querySelectorAll('.character-choice')];
+  const characterStories={
+    '贫女':'张协赴考落难时，贫女救助他，并与他结为夫妻。张协得中后，她的遭遇与追问把“情义”推到戏的中心。',
+    '张协':'书生张协赴考途中受贫女相助。功名到来后，他如何对待旧日约定，成为这出戏最尖锐的冲突。'
+  };
   const STAGE_W=1920,STAGE_H=1080;
   const time=n=>Number.isFinite(n)?`${String(Math.floor(n/60)).padStart(2,'0')}:${String(Math.floor(n%60)).padStart(2,'0')}`:'--:--';
   const status=text=>$('status').textContent=text;
@@ -50,7 +55,7 @@
     viewport.scrollLeft=0;viewport.scrollTop=0;
   }
   let introActive=!!introShade, introLeaving=false;
-  const introBackground=[...document.querySelectorAll('header, main, #editor, #stageBox, .transport, .subtitles, #status')];
+  const introBackground=[...document.querySelectorAll('header, main, #editor, #stageBox, #characterGuide, .transport, .subtitles, #status')];
   function endIntro(){
     if(!introActive||introLeaving)return;
     introLeaving=true;
@@ -82,14 +87,19 @@
     catch(error){if(id!==requestId||error.name==='AbortError')return;status(audio.error?'音频暂时无法读取，请检查 assets/excerpt.mp3。':'声音未能开始播放，请点击“继续听戏”。');}
     update();
   }
+  function selectCharacter(name=''){
+    stage.dataset.focus=name;
+    characterChoices.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.character===name)));
+    $('characterStory').textContent=name?characterStories[name]:'选一位人物，看看这出戏如何写人情与世情。';
+  }
   function openCurtain(){
     if(introActive||opened)return;
-    opened=true;opening=true;$('echo').hidden=true;stage.classList.remove('ended');stage.classList.add('opened');$('reveal').disabled=true;
+    opened=true;opening=true;$('echo').hidden=true;stage.classList.remove('ended');stage.classList.add('opened');$('characterGuide').hidden=false;viewport.classList.add('has-opened');$('reveal').disabled=true;
     status('帷幕渐启，请稍候。');update();
     timer=setTimeout(()=>{opening=false;timer=null;playAudio();},matchMedia('(prefers-reduced-motion: reduce)').matches?0:config.duration*1000);
   }
   function reset(){
-    requestId++;clearTimeout(timer);timer=null;audio.pause();audio.currentTime=0;opened=false;opening=false;stage.classList.remove('opened','playing','ended');$('reveal').disabled=false;$('echo').hidden=true;$('operaNotes').hidden=true;status('移动鼠标，循光看戏；也可直接点击启幕。');update();
+    requestId++;clearTimeout(timer);timer=null;audio.pause();audio.currentTime=0;opened=false;opening=false;stage.classList.remove('opened','playing','ended');viewport.classList.remove('has-opened');selectCharacter();$('characterGuide').hidden=true;$('reveal').disabled=false;$('echo').hidden=true;$('operaNotes').hidden=true;activateTab(tabs[0]);status('移动鼠标，循光看戏；也可直接点击启幕。');update();
   }
   function finish(skipped=false){
     requestId++;clearTimeout(timer);timer=null;opening=false;opened=true;audio.pause();stage.classList.add('opened','ended');$('reveal').disabled=true;$('echo').hidden=false;$('operaNotes').hidden=false;status(skipped?'已跳过唱段，可以继续走读。':'唱段已结束，余音仍在。');update();$('speaker').textContent='';$('line').textContent='';stage.dataset.speaker='';
@@ -98,9 +108,10 @@
   $('reveal').onclick=openCurtain;
   $('play').onclick=()=>{if(!opened){openCurtain();return;}if(opening)return;if(audio.paused){if(audio.ended)audio.currentTime=0;stage.classList.remove('ended');$('echo').hidden=true;playAudio();}else{requestId++;audio.pause();status('已暂停，点击继续听戏。');}};
   $('reset').onclick=reset;$('skip').onclick=()=>finish(true);
+  characterChoices.forEach(button=>button.onclick=()=>selectCharacter(stage.dataset.focus===button.dataset.character?'':button.dataset.character));
   const tabs=[...document.querySelectorAll('.archive-stop')];
   function activateTab(tab,focus=false){tabs.forEach(item=>{const active=item===tab;item.classList.toggle('is-active',active);item.setAttribute('aria-selected',String(active));item.tabIndex=active?0:-1;const panel=$(item.dataset.panel);panel.hidden=!active;panel.classList.toggle('is-active',active);});if(focus)tab.focus();}
-  tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>activateTab(tab));tab.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(index+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;activateTab(tabs[next],true);});});
+  tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>activateTab(tab));tab.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key))return;e.preventDefault();const forward=['ArrowRight','ArrowDown'].includes(e.key);const next=e.key==='Home'?0:e.key==='End'?tabs.length-1:(index+(forward?1:-1)+tabs.length)%tabs.length;activateTab(tabs[next],true);});});
   $('archiveReplay').onclick=()=>{reset();stage.scrollIntoView({block:'center',behavior:'smooth'});};
   $('replay').onclick=()=>{audio.currentTime=0;$('echo').hidden=true;stage.classList.remove('ended');stage.scrollIntoView({block:'center',behavior:'smooth'});playAudio();};
   $('mute').onclick=()=>{audio.muted=!audio.muted;update();};
