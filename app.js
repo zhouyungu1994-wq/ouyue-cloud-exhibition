@@ -89,15 +89,17 @@
     timer=setTimeout(()=>{opening=false;timer=null;playAudio();},matchMedia('(prefers-reduced-motion: reduce)').matches?0:config.duration*1000);
   }
   function reset(){
-    requestId++;clearTimeout(timer);timer=null;audio.pause();audio.currentTime=0;opened=false;opening=false;stage.classList.remove('opened','playing','ended');$('reveal').disabled=false;$('echo').hidden=true;status('移动鼠标，循光看戏；也可直接点击启幕。');update();
+    requestId++;clearTimeout(timer);timer=null;audio.pause();audio.currentTime=0;opened=false;opening=false;stage.classList.remove('opened','playing','ended');$('reveal').disabled=false;$('echo').hidden=true;$('openOperaNotes').hidden=true;if($('operaDialog').open)$('operaDialog').close();status('移动鼠标，循光看戏；也可直接点击启幕。');update();
   }
   function finish(skipped=false){
-    requestId++;clearTimeout(timer);timer=null;opening=false;opened=true;audio.pause();stage.classList.add('opened','ended');$('reveal').disabled=true;$('echo').hidden=false;status(skipped?'已跳过唱段，可以随时再听一遍。':'唱段已结束，余音仍在。');update();$('speaker').textContent='';$('line').textContent='';stage.dataset.speaker='';
+    requestId++;clearTimeout(timer);timer=null;opening=false;opened=true;audio.pause();stage.classList.add('opened','ended');$('reveal').disabled=true;$('echo').hidden=false;$('openOperaNotes').hidden=false;status(skipped?'已跳过唱段，可以随时再听一遍。':'唱段已结束，余音仍在。');update();$('speaker').textContent='';$('line').textContent='';stage.dataset.speaker='';
     $('echo').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
+    if(!skipped&&!$('operaDialog').open)$('operaDialog').showModal();
   }
   $('reveal').onclick=openCurtain;
   $('play').onclick=()=>{if(!opened){openCurtain();return;}if(opening)return;if(audio.paused){if(audio.ended)audio.currentTime=0;stage.classList.remove('ended');$('echo').hidden=true;playAudio();}else{requestId++;audio.pause();status('已暂停，点击继续听戏。');}};
   $('reset').onclick=reset;$('skip').onclick=()=>finish(true);
+  $('openOperaNotes').onclick=()=>{if(!$('operaDialog').open)$('operaDialog').showModal();};
   $('replay').onclick=()=>{audio.currentTime=0;$('echo').hidden=true;stage.classList.remove('ended');stage.scrollIntoView({block:'center',behavior:'smooth'});playAudio();};
   $('mute').onclick=()=>{audio.muted=!audio.muted;update();};
   $('progress').oninput=()=>{if(Number.isFinite(audio.duration)&&audio.duration>0){audio.currentTime=Number($('progress').value)/100*audio.duration;stage.classList.remove('ended');$('echo').hidden=true;update();}};

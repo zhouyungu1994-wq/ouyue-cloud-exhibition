@@ -82,7 +82,16 @@
     <h2>戏起一方台，声入一座城。</h2>
     <p>从一段唱腔，听见地方戏曲中的人情与世情。</p>
     <button id="replay">再听一遍</button>
+    <button id="openOperaNotes" hidden>再看南戏介绍</button>
   </section>
+  <footer>《水木之间·生生瓯越》数字云展 <span id="credit">唱段版本与来源待补充</span></footer>
+</main>
+
+<dialog class="opera-dialog" id="operaDialog" aria-labelledby="operaNotesTitle">
+  <div class="opera-dialog-head">
+    <p>唱毕入席 · 南戏手札</p>
+    <form method="dialog"><button aria-label="关闭南戏介绍">关闭</button></form>
+  </div>
   <section class="opera-notes" aria-labelledby="operaNotesTitle">
     <p class="opera-notes-kicker">听 · 见 · 留</p>
     <h2 id="operaNotesTitle">听戏识南戏</h2>
@@ -92,40 +101,63 @@
       <div class="opera-more-content">
         <p class="opera-more-intro">《张协状元》之外，以下四部作品合称“四大南戏”，也常简称“荆、刘、拜、杀”。</p>
         <div class="opera-grid">
-          <article class="opera-card opera-card-featured">
-            <p class="opera-card-label">重点读一出 · 温州故事</p>
-            <h3>《荆钗记》</h3>
-            <p>温州士子王十朋与钱玉莲以荆钗为信物，历经离合，故事写情、信与义。</p>
-          </article>
-          <article class="opera-card">
-            <h3>《白兔记》</h3>
-            <p>刘知远与李三娘历经离散与磨难，白兔引出母子重逢。</p>
-          </article>
-          <article class="opera-card">
-            <h3>《拜月亭》</h3>
-            <p>蒋世隆与王瑞兰在战乱中相遇相知，几经波折后团圆。</p>
-          </article>
-          <article class="opera-card">
-            <h3>《杀狗记》</h3>
-            <p>杨氏借“杀狗”设局劝夫，揭开酒肉朋友的真面目，促成兄弟和好。</p>
-          </article>
+          <details class="opera-card opera-card-featured">
+            <summary>
+              <span class="opera-card-label">重点读一出 · 温州故事</span>
+              <h3>《荆钗记》</h3>
+              <p class="opera-card-teaser">王十朋与钱玉莲以荆钗定情，因权势与误会几经离合。</p>
+              <span class="opera-card-action">展开故事 <span aria-hidden="true">＋</span></span>
+            </summary>
+            <div class="opera-card-detail">
+              <p>温州士子王十朋与钱玉莲以荆钗为信物订下婚约。王十朋赴试得中后拒绝权贵招赘，二人又因书信受阻、误会与权势阻挠而分离。经历曲折后，夫妻最终重逢。荆钗既是定情之物，也串起全剧对守信、情义与抗拒强权的书写。</p>
+              <a class="opera-card-source" href="https://www.mct.gov.cn/ggfw/zyjzzt/yanchu/yanchuwqhg/202407/t20240705_953897.html" target="_blank" rel="noopener noreferrer">故事与剧目介绍：文化和旅游部 ↗</a>
+            </div>
+          </details>
+          <details class="opera-card">
+            <summary>
+              <h3>《白兔记》</h3>
+              <p class="opera-card-teaser">刘知远、李三娘离散多年，白兔引出母子重逢。</p>
+              <span class="opera-card-action">展开故事 <span aria-hidden="true">＋</span></span>
+            </summary>
+            <div class="opera-card-detail">
+              <p>刘知远与李三娘成婚后，李家兄嫂嫌贫，对三娘百般欺凌。知远离家从军，三娘在磨房受苦并生下儿子咬脐郎。多年后，咬脐郎追逐白兔来到井边，与汲水的母亲相遇；白兔牵起寻亲线索，最终促成一家团圆。</p>
+              <a class="opera-card-source" href="https://openmuseum.tw/muse/digi_object/5ab29169cc0336867167cb8daf432422" target="_blank" rel="noopener noreferrer">故事来源：台湾音乐馆开放博物馆 ↗</a>
+            </div>
+          </details>
+          <details class="opera-card">
+            <summary>
+              <h3>《拜月亭》</h3>
+              <p class="opera-card-teaser">战乱中相遇的蒋世隆与王瑞兰，历经离合后团圆。</p>
+              <span class="opera-card-action">展开故事 <span aria-hidden="true">＋</span></span>
+            </summary>
+            <div class="opera-card-detail">
+              <p>战乱迫使王瑞兰与母亲逃难，也让书生蒋世隆和妹妹瑞莲失散。瑞兰与世隆途中相遇、患难相依并结为夫妻，却因门第之见遭父亲拆散。后来瑞兰在亭中拜月祈愿，亲人重逢、误会渐解，世隆与瑞兰终得团圆。</p>
+              <a class="opera-card-source" href="https://pedia.cloud.edu.tw/Entry/Detail/?search=%E6%8B%9C%E6%9C%88%E4%BA%AD&amp;title=%E6%8B%9C%E6%9C%88%E4%BA%AD" target="_blank" rel="noopener noreferrer">故事来源：台湾教育部教育百科 ↗</a>
+            </div>
+          </details>
+          <details class="opera-card">
+            <summary>
+              <h3>《杀狗记》</h3>
+              <p class="opera-card-teaser">杨氏设局劝夫，真假“尸体”照出朋友与手足的真心。</p>
+              <span class="opera-card-action">展开故事 <span aria-hidden="true">＋</span></span>
+            </summary>
+            <div class="opera-card-detail">
+              <p>孙华沉迷酒肉朋友，还把弟弟孙荣赶出家门。妻子杨氏杀死一只狗，将狗尸伪装成人形，试探孙华的朋友是否肯为他出力；朋友们纷纷推脱，弟弟孙荣却挺身相助。孙华由此看清谁值得信任，兄弟和好。故事借一场误会劝诫人珍惜手足、辨别虚情假意。</p>
+              <a class="opera-card-source" href="https://kotobank.jp/word/%E6%AE%BA%E7%8B%97%E8%A8%98-69166" target="_blank" rel="noopener noreferrer">故事来源：小学馆《日本大百科全书》 ↗</a>
+            </div>
+          </details>
         </div>
         <p class="opera-note-caveat">这些是传统戏文的故事梗概；不同版本的情节和人物称谓可能略有差异。</p>
         <div class="opera-sources" aria-label="内容来源">
           <span>内容来源</span>
           <a href="https://www.zjskw.gov.cn/art/2023/10/25/art_1229711390_55099.html" target="_blank" rel="noopener noreferrer">浙江社科网：南戏故里在温州</a>
           <a href="https://www.cp.com.cn/book/4acaa1b5-3.html" target="_blank" rel="noopener noreferrer">中国出版集团：《南戏原典〈张协状元〉研究》</a>
-          <a href="https://www.mct.gov.cn/ggfw/zyjzzt/yanchu/yanchuwqhg/202407/t20240705_953897.html" target="_blank" rel="noopener noreferrer">文化和旅游部：《荆钗记》介绍</a>
-          <a href="https://openmuseum.tw/muse/digi_object/5ab29169cc0336867167cb8daf432422" target="_blank" rel="noopener noreferrer">台湾音乐馆开放博物馆：《白兔记》故事</a>
-          <a href="https://pedia.cloud.edu.tw/Entry/Detail/?search=%E6%8B%9C%E6%9C%88%E4%BA%AD&amp;title=%E6%8B%9C%E6%9C%88%E4%BA%AD" target="_blank" rel="noopener noreferrer">台湾教育部教育百科：《拜月亭》</a>
           <a href="https://www.zgbk.com/ecph/words?ID=127546&amp;Preview=false&amp;SiteID=1&amp;Type=bkzyb" target="_blank" rel="noopener noreferrer">中国大百科全书：“荆刘拜杀”</a>
-          <a href="https://kotobank.jp/word/%E6%AE%BA%E7%8B%97%E8%A8%98-69166" target="_blank" rel="noopener noreferrer">小学馆《日本大百科全书》：“杀狗记”</a>
         </div>
       </div>
     </details>
   </section>
-  <footer>《水木之间·生生瓯越》数字云展 <span id="credit">唱段版本与来源待补充</span></footer>
-</main>
+</dialog>
 
 <aside id="editor" hidden aria-label="画面编辑面板">
   <div class="editor-head"><h2>调整画面</h2><button id="editClose" aria-label="关闭编辑面板">关闭</button></div>
