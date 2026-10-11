@@ -872,7 +872,7 @@ main{max-width:none;padding:0}
 .prologue-step>h2,.prologue-kicker{text-align:center}
 .prologue-panel{width:min(1360px,100%);max-height:calc(100dvh - 32px);padding:clamp(18px,2vw,28px)}
 .prologue-step{padding-top:12px}
-.playbill-opening{width:min(1250px,100%);aspect-ratio:1672/941;margin:0 auto;padding:0}
+.playbill-opening{width:min(1250px,120dvh,100%);aspect-ratio:1672/941;margin:0 auto;padding:0}
 .playbill-opening.has-art{border-color:transparent}
 .playbill-art{z-index:0}
 .bill-intro{position:absolute;z-index:2;inset:18% 13% 20%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;animation:bill-appear-dissolve 3.6s ease .55s both}
@@ -883,7 +883,7 @@ main{max-width:none;padding:0}
 .prologue-lead{text-align:center;margin:0 auto 6px;animation:none;opacity:1}
 @keyframes bill-appear-dissolve{0%{opacity:0;filter:blur(9px);transform:translateY(7px)}14%,60%{opacity:1;filter:none;transform:none}100%{opacity:0;filter:blur(11px);transform:translateY(-5px)}}
 .playbill-opening .story-cards{position:absolute;z-index:2;inset:20% 12% 20%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:12px}
-.playbill-opening .story-card{height:100%;max-height:310px;display:flex;flex-direction:column;border-color:#5e5d43aa;background:#efe1bbec;box-shadow:0 8px 22px #5d3b2733}
+.playbill-opening .story-card{height:auto;max-height:100%;display:flex;flex-direction:column;border-color:#5e5d43aa;background:#efe1bbec;box-shadow:0 8px 22px #5d3b2733}
 .playbill-opening .story-card>.story-visual{flex:0 0 auto;aspect-ratio:16/9}
 .playbill-opening .story-card>.story-copy{flex:1;padding:10px 12px 12px}
 .playbill-opening .story-card span{color:#77502f;font-size:10px;letter-spacing:.06em}
