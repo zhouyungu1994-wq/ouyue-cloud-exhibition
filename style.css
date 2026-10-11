@@ -965,3 +965,15 @@ main{max-width:none;padding:0}
 @keyframes third-station-reveal{from{opacity:0;filter:blur(5px);transform:translateX(26px)}to{opacity:1;filter:none;transform:none}}
 @media(max-width:760px){.costume-person,.costume-person.is-active{height:88px;min-height:88px;padding:8px;grid-template-columns:64px minmax(0,1fr) 14px;gap:8px}.costume-avatar{width:58px;height:58px;flex-basis:58px}}
 @media(prefers-reduced-motion:reduce){.archive-repertoire.is-entered{animation:none}}
+
+/* 第三站标题组从内容列左缘起排，与下方剧目卡片顶格对齐。 */
+.archive-repertoire .repertoire-head{justify-items:start;text-align:left}
+.archive-repertoire .repertoire-head>div,.archive-repertoire .repertoire-head .archive-kicker,.archive-repertoire .repertoire-head h3,.archive-repertoire .repertoire-head>p{text-align:left}
+.archive-repertoire .repertoire-head>div{width:100%}
+
+/* 戏单的三行文字共用卷轴中心轴；主标题按字形作轻微视觉校正。 */
+.bill-intro{left:13%;right:13%;width:auto;align-items:stretch}
+.bill-intro>span,.bill-intro>h2,.bill-intro>p{display:block;width:100%;text-align:center}
+.bill-intro h2{position:relative;left:.4em}
+@media(max-width:760px){.bill-intro{left:14%;right:14%}}
+
