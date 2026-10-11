@@ -118,7 +118,7 @@
     $('storyStep').hidden=true;$('costumeStep').hidden=false;
     $('prologueStepLabel').textContent='看衣识人';
     selectCostume('张协');
-    $('costumeZhang').focus({preventScroll:true});
+    $('costumeStepTitle').focus({preventScroll:true});
   }
   function leavePrologue(){
     $('prologueShade').classList.add('is-closing');
@@ -152,6 +152,8 @@
   }
   $('reveal').onclick=openCurtain;
   $('echoContinue').addEventListener('click',e=>{e.preventDefault();$('operaNotes').hidden=false;requestAnimationFrame(()=>{$('archiveKnowledge').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});});});
+  const thirdStation=$('archiveRepertoire');
+  if('IntersectionObserver' in window){const stationObserver=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){thirdStation.classList.add('is-entered');stationObserver.disconnect();}},{threshold:.16});stationObserver.observe(thirdStation);}else{thirdStation.classList.add('is-entered');}
   $('toCostumes').onclick=showCostumes;$('skipStory').onclick=showCostumes;$('backToStory').onclick=()=>{ $('costumeStep').hidden=true;$('storyStep').hidden=false;$('prologueStepLabel').textContent='前情三折';$('toCostumes').focus(); };
   $('launchPlay').onclick=leavePrologue;$('launchFromStory').onclick=leavePrologue;$('launchFromCostume').onclick=leavePrologue;
   const costumeButtons=[...document.querySelectorAll('.costume-person')];

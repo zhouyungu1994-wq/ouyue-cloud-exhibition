@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>城中有声 · 水木之间</title>
-<link rel="stylesheet" href="./style.css?v=20261011-layout-fix-v5">
+<link rel="stylesheet" href="./style.css?v=20261011-layout-fix-v6">
 </head>
 <body>
 <header>
@@ -94,7 +94,7 @@
       </div>
       <div class="prologue-step" id="costumeStep" hidden>
         <p class="prologue-kicker">看衣识人 · 点击人物</p>
-        <h2>衣着，也在讲述命运</h2>
+        <h2 id="costumeStepTitle" tabindex="-1">衣着，也在讲述命运</h2>
         <p class="prologue-lead">选择一位人物，看看这版瓯剧如何用舞台服饰提示身份与处境。</p>
         <div class="costume-choices" role="tablist" aria-label="选择人物服饰">
           <button class="costume-person is-active" id="costumeZhang" role="tab" aria-selected="true" aria-controls="costumeDetail" data-costume="张协"><span class="costume-avatar zhang-avatar" aria-hidden="true"><img src="./assets/rig/zhang-head.png" alt=""></span><span><b>张协</b><small>落魄书生 → 新科状元</small></span><span class="costume-arrow" aria-hidden="true">↗</span></button>
@@ -126,7 +126,7 @@
     <span>选段聆听</span>
     <button type="button" data-seek="0"><i>01</i><b>贫女倾诉</b><small>开篇</small></button>
     <button type="button" data-seek="72"><i>02</i><b>为何独唱你</b><small>01:12 · 情绪转折</small></button>
-    <button type="button" data-seek="tail"><i>03</i><b>张协求饶</b><small>录音尾段 · 起点待校准</small></button>
+    <button type="button" data-seek="95"><i>03</i><b>张协求饶</b><small>01:35 · 录音尾声</small></button>
   </nav>
   <p class="status" id="status" role="status">移动鼠标，循光看戏；也可直接点击启幕。</p>
 </div>
@@ -210,6 +210,6 @@
 <audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio>
 <noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript>
 <script src="./config.js"></script>
-<script src="./app.js?v=20261011-layout-fix-v4"></script>
+<script src="./app.js?v=20261011-layout-fix-v6"></script>
 </body>
 </html>
