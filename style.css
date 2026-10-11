@@ -796,3 +796,15 @@ noscript{
 .stage-caption small{color:#aaa18e;font-size:9px;letter-spacing:.04em}
 @media(max-width:760px){.playbill-opening{aspect-ratio:1.68/1;padding:10% 13%;gap:6px;background-size:100% 100%}.playbill-opening h2{font-size:clamp(22px,6vw,30px);letter-spacing:.06em}.playbill-opening>span,.playbill-opening>p{font-size:9px;letter-spacing:.12em}.costume-avatar{width:42px;height:42px;flex-basis:42px}.stage-caption{right:9px;top:auto;bottom:116px;max-width:46vw;padding:6px 8px}.stage-caption strong{font-size:9px}.stage-caption span,.stage-caption small{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.playbill-opening,.playbill-opening>*{animation:none!important;opacity:1;filter:none;clip-path:none}}
+
+/* 素材尚未发布或读取失败时，戏单仍可阅读。 */
+.playbill-opening{background:linear-gradient(135deg,#f1dfb7,#d8bd8e 52%,#ead3a5);border:1px solid #b48d55;box-shadow:inset 0 0 0 7px #714f2b20,inset 0 0 65px #78542e44,0 14px 36px #0005}
+.playbill-opening.has-art{background:transparent;border-color:transparent;box-shadow:none}
+.playbill-art{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:fill;pointer-events:none}
+.playbill-art.is-missing{display:none}
+.story-card>.story-visual{position:relative;display:grid;place-items:center;aspect-ratio:16/9;overflow:hidden;padding:0;background:radial-gradient(ellipse at center,#79633c55,#17251d 70%),repeating-linear-gradient(90deg,#b6974b0d 0 1px,transparent 1px 18px);border-bottom:1px solid #b7a47a33}
+.story-visual>span{color:#d9be86;font-family:"STSong","SimSun",serif;font-size:clamp(36px,6vw,70px);line-height:1;text-shadow:0 2px 18px #0008}
+.story-visual>img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
+.story-visual>img.is-missing{display:none}
+.story-card>.story-copy{padding:16px 17px 18px}
+@media(max-width:760px){.story-card>.story-visual{height:100%;min-height:112px;aspect-ratio:auto}.story-card>.story-copy{padding:12px}}

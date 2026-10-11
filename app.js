@@ -1,6 +1,19 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
+  const playbillArt=document.querySelector('.playbill-art');
+  if(playbillArt){
+    const showArt=()=>playbillArt.parentElement.classList.add('has-art');
+    const hideArt=()=>playbillArt.classList.add('is-missing');
+    playbillArt.addEventListener('load',showArt);
+    playbillArt.addEventListener('error',hideArt);
+    if(playbillArt.complete)(playbillArt.naturalWidth?showArt:hideArt)();
+  }
+  document.querySelectorAll('.story-visual img').forEach(img=>{
+    const hide=()=>img.classList.add('is-missing');
+    img.addEventListener('error',hide);
+    if(img.complete&&!img.naturalWidth)hide();
+  });
   const defaults = { title:'城中有声', intro:'隔一重帘，听一段唱腔；循着《张协状元》，走近温州南戏的文献与传承。', dark:.85, glow:110, duration:2.8, mist:.15, volume:.75, motion:.5, credit:'演出：温州市瓯剧艺术研究院（温州市瓯剧团）｜创排首演：2021年10月·温州东南剧院｜张协：方汝将；贫女：叶媛媛', cues:[] };
   const limits = {dark:[.3,.95],glow:[40,250],duration:[1,6],mist:[0,.4],volume:[0,1],motion:[0,1]};
   const storageKey='ouyue-city-sound-v2';
