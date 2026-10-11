@@ -111,7 +111,7 @@
   }
   function leavePrologue(){
     $('prologueShade').classList.add('is-closing');
-    setTimeout(()=>{$('prologueShade').hidden=true;$('prologueShade').classList.remove('is-closing');openCurtain();},matchMedia('(prefers-reduced-motion: reduce)').matches?0:500);
+    setTimeout(()=>{$('prologueShade').hidden=true;$('prologueShade').classList.remove('is-closing');status('导览已结束。点击舞台中央，拉开帷幕并开始聆听。');$('reveal').focus({preventScroll:true});},matchMedia('(prefers-reduced-motion: reduce)').matches?0:800);
   }
   async function playAudio(){
     const id=++requestId;
@@ -135,10 +135,12 @@
     requestId++;clearTimeout(timer);timer=null;audio.pause();audio.currentTime=0;opened=false;opening=false;stage.classList.remove('opened','playing','ended');viewport.classList.remove('has-opened');selectCharacter();$('characterGuide').hidden=true;$('reveal').disabled=false;$('echo').hidden=true;$('operaNotes').hidden=true;$('playMarkers').hidden=true;activateTab(tabs[0]);showPrologue();status('前情戏单已展开，可以重新入戏。');update();
   }
   function finish(skipped=false){
-    requestId++;clearTimeout(timer);timer=null;opening=false;opened=true;audio.pause();stage.classList.add('opened','ended');$('reveal').disabled=true;$('playMarkers').hidden=true;$('echo').hidden=false;$('operaNotes').hidden=false;status(skipped?'已跳过唱段，可以继续走读。':'唱段已结束，余音仍在。');update();$('speaker').textContent='';$('line').textContent='';stage.dataset.speaker='';
-    $('echo').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
+    requestId++;clearTimeout(timer);timer=null;opening=false;opened=true;audio.pause();stage.classList.add('opened','ended');$('reveal').disabled=true;$('playMarkers').hidden=true;$('echo').hidden=false;$('operaNotes').hidden=true;status(skipped?'唱段已跳过。':'唱段已结束，余音仍在。');update();$('speaker').textContent='';$('line').textContent='';stage.dataset.speaker='';
+    $('echo').classList.remove('is-arriving');void $('echo').offsetWidth;$('echo').classList.add('is-arriving');
+    $('echo').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});
   }
   $('reveal').onclick=openCurtain;
+  $('echoContinue').addEventListener('click',e=>{e.preventDefault();$('operaNotes').hidden=false;requestAnimationFrame(()=>{$('archiveKnowledge').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});});});
   $('toCostumes').onclick=showCostumes;$('skipStory').onclick=showCostumes;$('backToStory').onclick=()=>{ $('costumeStep').hidden=true;$('storyStep').hidden=false;$('prologueStepLabel').textContent='前情三折';$('toCostumes').focus(); };
   $('launchPlay').onclick=leavePrologue;$('launchFromStory').onclick=leavePrologue;$('launchFromCostume').onclick=leavePrologue;
   const costumeButtons=[...document.querySelectorAll('.costume-person')];
