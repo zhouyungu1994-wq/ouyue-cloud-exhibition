@@ -144,14 +144,14 @@
   const costumeButtons=[...document.querySelectorAll('.costume-person')];
   const costumeText={
     '张协':{index:'人物一 · 身份转折',title:'张协：衣色随身份而变',phases:[
-      {label:'落魄书生',copy:'资料中的这一阶段以素淡长衫、方巾和布鞋表现赶考失意的书生。朴素衣着先交代他的落魄处境，也为后来衣色转红、身份改变形成视觉对照。'},
+      {label:'落魄书生',copy:'此阶段以素淡长衫、方巾与布鞋呈现赶考失意的书生形象。朴素衣着与后续红色官袍形成对照，提示人物身份的转变。'},
       {label:'新科状元',copy:'高中之后，舞台造型转为醒目的红色官袍，并配以翅帽。红色与较正式的官服轮廓提示功名带来的身份跃升；这也使他与曾经救助自己的贫女形成强烈处境反差。'},
-      {label:'私欲官员',copy:'服饰解读资料还以较深的色调表现张协后续的官员形象。与书生阶段的素色、状元阶段的红色并看，服装色彩成为舞台呈现人物变化的一条线索。'}
-    ],caveat:'这是你提供的瓯剧演出服饰解读对舞台造型的分析，不是宋代服饰复原；不同演出版本可能采用不同设计。'},
+      {label:'私欲官员',copy:'后续官员形象采用较深色调。与书生阶段的素色、状元阶段的红色相对照，服装色彩参与塑造人物身份变化。'}
+    ],caveat:'本段解读针对特定瓯剧演出版本的舞台造型，不作为宋代服饰复原；不同演出版本的服装设计可能存在差异。'},
     '贫女':{index:'人物二 · 朴素与坚守',title:'贫女：朴素衣着中的辨识线索',phases:[
-      {label:'贫女造型',copy:'资料将贫女的舞台服装处理为朴素的民间女性装束；结合你提供的演出画面，可观察粉色交领上衣、裙装，以及蓝色头巾与蓝白纹样。她的造型与张协后来醒目的官服并置，凸显两人处境的差异。'},
-      {label:'前后对照',copy:'现有服饰资料没有明确说明贫女在“获救—成婚—重逢”之间经历了特定换装，因此这里不把画面差异说成剧情中的服饰变化。可以对照三幅前情图与重逢唱段，观察同一角色如何以朴素造型贯穿故事。'}
-    ],caveat:'服装细节以本次提供的服饰解读资料和演出影像为依据；舞台造型不等同于宋代日常服饰。'}
+      {label:'贫女造型',copy:'该版本中的贫女身着朴素的民间女性装束，可见粉色交领上衣、裙装、蓝色头巾及蓝白纹样。与张协后来的官服并置，形成身份与处境的视觉对照。'},
+      {label:'前后对照',copy:'现有剧情与服饰材料未明确记载贫女在“获救—成婚—重逢”之间的换装。对照前情插画与重逢唱段，可观察其朴素造型如何贯穿不同情境。'}
+    ],caveat:'服装细节依据该演出版本的服饰解读与影像；舞台造型不等同于宋代日常服饰。'}
   };
   function selectCostume(name){const d=costumeText[name];costumeButtons.forEach(button=>{const active=button.dataset.costume===name;button.classList.toggle('is-active',active);button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;});$('costumeDetail').setAttribute('aria-labelledby',name==='张协'?'costumeZhang':'costumePinnv');$('costumeIndex').textContent=d.index;$('costumeTitle').textContent=d.title;$('costumeCaveat').textContent=d.caveat;
     const phaseBox=$('costumePhases');phaseBox.replaceChildren();
@@ -159,7 +159,7 @@
     $('costumeCopy').textContent=d.phases[0].copy;
   }
   costumeButtons.forEach((button,index)=>{button.onclick=()=>selectCostume(button.dataset.costume);button.onkeydown=e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?costumeButtons.length-1:(index+(e.key==='ArrowRight'?1:-1)+costumeButtons.length)%costumeButtons.length;costumeButtons[next].click();costumeButtons[next].focus();};});
-  playMarkers.forEach(button=>button.onclick=()=>{if(!opened||opening)return;let target=button.dataset.seek==='tail'?Math.max(72,(audio.duration||0)-15):Number(button.dataset.seek);if(!Number.isFinite(target)||!Number.isFinite(audio.duration)||audio.duration<=0)return;audio.currentTime=Math.min(target,Math.max(0,audio.duration-.25));stage.classList.remove('ended');$('echo').hidden=true;status(button.dataset.seek==='tail'?'已跳到录音尾段；资料未标明“张协求饶”的精确时间，请以完整录音复核。':'已跳转到唱段节点。');playAudio();update();});
+  playMarkers.forEach(button=>button.onclick=()=>{if(!opened||opening)return;let target=button.dataset.seek==='tail'?Math.max(72,(audio.duration||0)-15):Number(button.dataset.seek);if(!Number.isFinite(target)||!Number.isFinite(audio.duration)||audio.duration<=0)return;audio.currentTime=Math.min(target,Math.max(0,audio.duration-.25));stage.classList.remove('ended');$('echo').hidden=true;status(button.dataset.seek==='tail'?'已跳至录音尾段。该节点时间为便于浏览而设，建议结合完整唱段理解剧情。':'已跳转至所选唱段节点。');playAudio();update();});
   $('play').onclick=()=>{if(!opened){openCurtain();return;}if(opening)return;if(audio.paused){if(audio.ended)audio.currentTime=0;stage.classList.remove('ended');$('echo').hidden=true;playAudio();}else{requestId++;audio.pause();status('已暂停，点击继续听戏。');}};
   $('reset').onclick=reset;$('skip').onclick=()=>finish(true);
   characterChoices.forEach(button=>button.onclick=()=>selectCharacter(stage.dataset.focus===button.dataset.character?'':button.dataset.character));
