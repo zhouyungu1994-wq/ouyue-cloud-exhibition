@@ -965,4 +965,3 @@ main{max-width:none;padding:0}
 @keyframes third-station-reveal{from{opacity:0;filter:blur(5px);transform:translateX(26px)}to{opacity:1;filter:none;transform:none}}
 @media(max-width:760px){.costume-person,.costume-person.is-active{height:88px;min-height:88px;padding:8px;grid-template-columns:64px minmax(0,1fr) 14px;gap:8px}.costume-avatar{width:58px;height:58px;flex-basis:58px}}
 @media(prefers-reduced-motion:reduce){.archive-repertoire.is-entered{animation:none}}
-
