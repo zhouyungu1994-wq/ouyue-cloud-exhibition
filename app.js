@@ -29,6 +29,17 @@
   let config={...initial}, opened=false, opening=false, timer=null, requestId=0;
   try {const saved=localStorage.getItem(storageKey);if(saved)config=normalize(JSON.parse(saved));}catch{}
   const audio=$('audio'),stage=$('stage'),viewport=$('stageViewport'),box=$('stageBox'),introShade=$('introShade'),introSkip=$('introSkip');
+  const stageImage=document.querySelector('.stage-bg');
+  if(stageImage){
+    const useFallback=()=>{
+      if(stageImage.dataset.fallback){stageImage.hidden=true;return;}
+      stageImage.dataset.fallback='true';
+      stage.classList.add('using-fallback');
+      stageImage.src='./assets/stage-clean-1920.png';
+    };
+    stageImage.addEventListener('error',useFallback);
+    if(stageImage.complete&&!stageImage.naturalWidth)useFallback();
+  }
   const characterChoices=[...document.querySelectorAll('.character-choice')];
   const characterStories={
     '贫女':'张协赴考落难时，贫女救助他，并与他结为夫妻。张协得中后，她的遭遇与追问把“情义”推到戏的中心。',
@@ -120,7 +131,7 @@
     update();
   }
   function selectCharacter(name=''){
-    stage.dataset.focus=name;
+    if(name)stage.dataset.focus=name;else delete stage.dataset.focus;
     characterChoices.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.character===name)));
     $('characterStory').textContent=name?characterStories[name]:'选一位人物，看看这出戏如何写人情与世情。';
   }

@@ -810,7 +810,7 @@ noscript{
 @media(max-width:760px){.story-card>.story-visual{height:100%;min-height:112px;aspect-ratio:auto}.story-card>.story-copy{padding:12px}}
 
 /* 逐屏导览：每次滚动停在一页，展开的戏文在本页内阅读。 */
-html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+html{scroll-snap-type:y proximity;scroll-behavior:smooth}
 .stage-viewport,.heading,.echo,.archive-page{scroll-snap-align:start;scroll-snap-stop:always}
 main{max-width:none;padding:0}
 .heading{width:min(1600px,100%);min-height:100dvh;margin:0 auto;padding:90px 34px 46px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -823,7 +823,7 @@ main{max-width:none;padding:0}
 .echo #replay{margin-top:16px}
 #operaNotes{display:contents}
 #operaNotes[hidden]{display:none!important}
-.archive-page{width:100%;height:100dvh;min-height:100dvh;max-height:100dvh;overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2vh,24px);padding:clamp(95px,12vh,132px) clamp(18px,5vw,82px) 36px;scroll-margin:0}
+.archive-page{width:100%;height:auto;min-height:100dvh;max-height:none;overflow:visible;overscroll-behavior:auto;display:flex;flex-direction:column;justify-content:flex-start;gap:clamp(18px,2.5vh,28px);padding:clamp(95px,12vh,132px) clamp(18px,5vw,82px) 48px;scroll-margin:0;scroll-snap-stop:normal}
 .archive-topline{width:min(1300px,100%);margin:0 auto}
 .archive-intro{width:min(1100px,100%);display:block;text-align:center;margin:0 auto;padding:0}
 .archive-intro h2{max-width:none;margin:8px auto 12px;text-align:center}
@@ -831,7 +831,7 @@ main{max-width:none;padding:0}
 .archive-path{width:min(1100px,100%);margin:0 auto}
 .archive-stop{text-align:center;grid-template-columns:1fr;grid-template-rows:auto auto auto;gap:4px;justify-items:center;padding:13px}
 .archive-stop>span{grid-row:auto}
-.archive-panel{width:min(1100px,100%);min-height:0;flex:1;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:clamp(20px,4vh,42px) clamp(20px,6vw,72px);text-align:center;border-top:1px solid #b7a47a2a}
+.archive-panel{width:min(1100px,100%);min-height:260px;flex:none;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:clamp(24px,4vh,42px) clamp(20px,6vw,72px);text-align:center;border-top:1px solid #b7a47a2a}
 .archive-index{text-align:center;font-size:26px}
 .archive-index i{display:inline;margin-left:9px}
 .archive-panel>div:last-child{width:100%;display:flex;flex-direction:column;align-items:center}
@@ -858,46 +858,53 @@ main{max-width:none;padding:0}
 .archive-end{width:min(1240px,100%);margin:0 auto;padding:8px 0 0}
 .archive-repertoire footer{width:min(1240px,100%);margin:8px auto 0;padding:12px 0 0;align-items:center}
 .costume-detail h3{text-align:center}
-.costume-person{display:grid;grid-template-columns:56px minmax(0,1fr) auto;align-items:center;gap:14px}
-.costume-avatar{width:52px;height:52px;flex-basis:52px;margin-inline:auto;display:grid;place-items:center;justify-self:center}
-.costume-avatar img{width:128%;height:128%;max-width:none;max-height:none;object-fit:contain;object-position:center;transform:scale(1.04)}
-.costume-avatar.zhang-avatar img{transform:translate(3%,1%) scale(1.06)}
-.costume-avatar.pinnv-avatar img{transform:translate(-2%,1%) scale(1.16)}
+.costume-person{display:grid;grid-template-columns:90px minmax(0,1fr) 18px;align-items:center;gap:16px;min-height:112px}
+.costume-avatar{width:86px;height:86px;flex-basis:86px;margin-inline:auto;display:grid;place-items:center;justify-self:center;overflow:visible;border:0;border-radius:0;background:none;box-shadow:none}
+.costume-avatar img,.costume-avatar.zhang-avatar img,.costume-avatar.pinnv-avatar img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;transform:none}
 .stage-spotlight{position:absolute;z-index:2;inset:0;opacity:0;pointer-events:none;transition:opacity .8s ease,background-position .8s ease;background:radial-gradient(ellipse at var(--focus-x,50%) var(--focus-y,55%),transparent 0 9%,#07100db3 34%,#07100d99 100%)}
 .stage[data-focus="张协"]{--focus-x:45%;--focus-y:57%}
 .stage[data-focus="贫女"]{--focus-x:58%;--focus-y:57%}
-.stage[data-focus] .stage-spotlight{opacity:1}
+.stage[data-focus="张协"] .stage-spotlight,.stage[data-focus="贫女"] .stage-spotlight{opacity:1}
 .original-rig{display:none!important}
+.stage.using-fallback .original-rig{display:block!important}
 .stage-caption{max-width:min(390px,32vw);text-align:left}
 .stage-caption strong,.stage-caption span,.stage-caption small{text-align:left}
 .prologue-step>h2,.prologue-kicker{text-align:center}
-.playbill-opening{width:min(890px,100%);aspect-ratio:2.32/1;margin:0 auto 4px;padding:7% 14%;}
+.prologue-panel{width:min(1360px,100%);max-height:calc(100dvh - 32px);padding:clamp(18px,2vw,28px)}
+.prologue-step{padding-top:12px}
+.playbill-opening{width:min(1250px,100%);aspect-ratio:1672/941;margin:0 auto;padding:0}
 .playbill-opening.has-art{border-color:transparent}
-.prologue-lead{text-align:center;margin:0 auto 6px}
-.playbill-opening>span,.playbill-opening h2,.playbill-opening>p,.prologue-kicker,.prologue-lead{animation:bill-appear-dissolve 3.6s ease both}
-.playbill-opening>span{animation-delay:.35s}
-.playbill-opening h2{animation-delay:.55s}
-.playbill-opening>p{animation-delay:.75s}
-.prologue-kicker{animation-delay:0s}
-.prologue-lead{animation-delay:.15s}
+.playbill-art{z-index:0}
+.bill-intro{position:absolute;z-index:2;inset:18% 13% 20%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;animation:bill-appear-dissolve 3.6s ease .55s both}
+.bill-intro span{color:#536043;font-size:clamp(10px,1vw,13px);letter-spacing:.18em}
+.bill-intro h2{margin:0;color:#26382b;font-family:"STSong","SimSun",serif;font-size:clamp(27px,4vw,48px);font-weight:500;letter-spacing:.1em;text-align:center;text-shadow:0 1px #f4e3bb88}
+.bill-intro p{margin:0;color:#715c3e;font-size:clamp(10px,1vw,13px);letter-spacing:.15em}
+.prologue-kicker{animation:none;opacity:1}
+.prologue-lead{text-align:center;margin:0 auto 6px;animation:none;opacity:1}
 @keyframes bill-appear-dissolve{0%{opacity:0;filter:blur(9px);transform:translateY(7px)}14%,60%{opacity:1;filter:none;transform:none}100%{opacity:0;filter:blur(11px);transform:translateY(-5px)}}
+.playbill-opening .story-cards{position:absolute;z-index:2;inset:20% 12% 20%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:12px}
+.playbill-opening .story-card{height:100%;max-height:310px;display:flex;flex-direction:column;border-color:#5e5d43aa;background:#efe1bbec;box-shadow:0 8px 22px #5d3b2733}
+.playbill-opening .story-card>.story-visual{flex:0 0 auto;aspect-ratio:16/9}
+.playbill-opening .story-card>.story-copy{flex:1;padding:10px 12px 12px}
+.playbill-opening .story-card span{color:#77502f;font-size:10px;letter-spacing:.06em}
+.playbill-opening .story-card p{color:#3e3f30;font-size:11px;line-height:1.55;margin:6px 0 0}
 .story-card{animation:ink-card-in 1s cubic-bezier(.2,.7,.25,1) 3.8s both}
 .story-card:nth-child(2){animation-delay:4.55s}
 .story-card:nth-child(3){animation-delay:5.3s}
 .story-card:hover img{filter:saturate(1) brightness(1);transform:scale(1.035)}
-.prologue-actions{animation:none;opacity:1}
+.prologue-actions{animation:none;opacity:1;margin-top:10px;padding-top:10px}
 @keyframes story-actions-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 @media(max-width:760px){
   html{scroll-snap-type:y proximity}
   .heading{min-height:100svh;padding:90px 18px 42px}
   .echo{min-height:100svh;padding:90px 20px 40px}
-  .archive-page{height:100svh;min-height:0;max-height:100svh;padding:86px 16px 24px;gap:12px}
+  .archive-page{height:auto;min-height:100svh;max-height:none;overflow:visible;padding:86px 16px 28px;gap:16px}
   .archive-intro h2{font-size:clamp(25px,7vw,36px)}
   .archive-intro>p{font-size:12px;line-height:1.8}
   .archive-path{grid-template-columns:repeat(3,minmax(0,1fr))}
   .archive-stop{min-height:75px;padding:8px 4px;border-right:1px solid #b7a47a22;border-bottom:0;grid-template-columns:1fr}
   .archive-stop b{font-size:13px}.archive-stop small{font-size:8px;line-height:1.4}
-  .archive-panel{padding:14px 14px;gap:7px}
+  .archive-panel{min-height:0;padding:22px 14px;gap:10px}
   .archive-panel h3{font-size:17px;margin:0 0 5px}
   .archive-panel p{font-size:11px;line-height:1.75;margin-bottom:6px}
   .archive-panel .archive-source{font-size:9px}
@@ -911,13 +918,22 @@ main{max-width:none;padding:0}
   .archive-sources a{font-size:8px}
   .archive-end{font-size:9px}
   .archive-repertoire footer{font-size:8px}
-  .costume-person{grid-template-columns:46px minmax(0,1fr) auto}
-  .costume-avatar{width:44px;height:44px;flex-basis:44px}
-  .playbill-opening{width:min(630px,100%);aspect-ratio:1.85/1;padding:9% 13%}
+  .costume-person{grid-template-columns:64px minmax(0,1fr) 14px;min-height:84px;gap:8px}
+  .costume-avatar{width:62px;height:62px;flex-basis:62px}
+  .playbill-opening{width:min(630px,100%);aspect-ratio:1.25/1;padding:0}
+  .playbill-art{object-fit:fill}
+  .bill-intro{inset:20% 14%;gap:5px}
+  .bill-intro h2{font-size:clamp(22px,5vw,30px)}
+  .playbill-opening .story-cards{inset:16% 12% 20%;display:flex;align-items:center;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .playbill-opening .story-cards::-webkit-scrollbar{display:none}
+  .playbill-opening .story-card{flex:0 0 90%;height:auto;max-height:100%;scroll-snap-align:center}
+  .playbill-opening .story-card>.story-visual{aspect-ratio:2.2/1}
+  .playbill-opening .story-card>.story-copy{padding:6px 8px}
+  .playbill-opening .story-card p{font-size:10px;line-height:1.35;margin:3px 0 0}
   .prologue-panel{max-height:calc(100svh - 16px);padding:18px 14px}
   .prologue-step h2{font-size:clamp(23px,6vw,34px)}
   .story-cards{grid-template-columns:1fr;gap:8px}
-  .story-card{grid-template-columns:minmax(110px,.75fr) minmax(0,1fr)}
+  .playbill-opening .story-card{display:flex}
   .story-card:nth-child(n){animation-delay:3.8s}
   .story-card:nth-child(2){animation-delay:4.35s}.story-card:nth-child(3){animation-delay:4.9s}
 }
@@ -929,7 +945,9 @@ main{max-width:none;padding:0}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;scroll-snap-type:none}
-  .playbill-opening>span,.playbill-opening h2,.playbill-opening>p,.prologue-kicker,.prologue-lead{animation:none;opacity:1;filter:none}
+  .bill-intro{animation:none;opacity:1;inset:16% 12% auto;gap:2px}
+  .bill-intro h2{font-size:clamp(19px,3vw,31px)}
+  .playbill-opening .story-cards{top:38%;bottom:15%}
   .story-card,.prologue-actions{animation:none;opacity:1}
   .echo.is-arriving{animation:none;opacity:1;filter:none;transform:none}
 }

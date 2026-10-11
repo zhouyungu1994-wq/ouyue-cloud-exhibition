@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>城中有声 · 水木之间</title>
-<link rel="stylesheet" href="./style.css?v=20261011-page-scroll-v3">
+<link rel="stylesheet" href="./style.css?v=20261011-layout-fix-v4">
 </head>
 <body>
 <header>
@@ -16,7 +16,7 @@
 <div class="stage-viewport" id="stageViewport">
   <div class="stage-box" id="stageBox">
     <section class="stage" id="stage" aria-label="互动戏台">
-      <img class="layer stage-bg" src="./assets/stage-with-actors-from-new-stage.png" alt="瓯剧风格戏台与张协、贫女对戏场景">
+      <img class="layer stage-bg" src="./assets/stage-with-actors-from-new-stage.png?v=20261011-layout-fix-v4" alt="瓯剧风格戏台与张协、贫女对戏场景" loading="eager">
       <div class="stage-spotlight" aria-hidden="true"></div>
       <svg class="actor original-rig zhang" viewBox="0 0 1920 1080" role="img" aria-label="红袍张协，原画比例，头部与手臂轻摆">
         <defs>
@@ -79,15 +79,16 @@
         <p class="prologue-kicker">灯影拓印 · 前情三折</p>
         <div class="playbill-opening" aria-labelledby="prologueTitle">
           <img class="playbill-art" src="./assets/prologue/playbill-scroll.png" alt="" aria-hidden="true">
-          <span>《张协状元》 · 瓯剧选段</span>
-          <h2 id="prologueTitle">她为何要问责张协？</h2>
-          <p>入戏之前 · 本场戏单</p>
-        </div>
-        <p class="prologue-lead">戏单展开，三折前情依次显影。先看清这场问责从何而来。</p>
-        <div class="story-cards">
-          <article class="story-card"><div class="story-visual"><span aria-hidden="true">一</span><img src="./assets/prologue/01-rescue.png" alt="张协途中遇险，贫女伸手相救的情境插画"></div><div class="story-copy"><span>第一折 · 落难相救</span><p>张协赴考途中遇险，贫女出手相救，两人的命运由此相连。</p></div></article>
-          <article class="story-card"><div class="story-visual"><span aria-hidden="true">二</span><img src="./assets/prologue/02-marriage.png" alt="贫女与张协患难相依、结为夫妻的情境插画"></div><div class="story-copy"><span>第二折 · 结为夫妻</span><p>患难相依之中，两人结为夫妻；这段恩情成为重逢时无法回避的旧约。</p></div></article>
-          <article class="story-card"><div class="story-visual"><span aria-hidden="true">三</span><img src="./assets/prologue/03-reunion.png" alt="贫女与张协重逢问责的情境插画"></div><div class="story-copy"><span>第三折 · 重逢问责</span><p>多年后再次相遇，贫女追问旧情，唱段从此刻进入最尖锐的冲突。</p></div></article>
+          <div class="bill-intro">
+            <span>《张协状元》 · 瓯剧选段</span>
+            <h2 id="prologueTitle">她为何要问责张协？</h2>
+            <p>戏单展开，三折前情依次显影。</p>
+          </div>
+          <div class="story-cards" aria-label="前情三折">
+            <article class="story-card"><div class="story-visual"><span aria-hidden="true">一</span><img src="./assets/prologue/01-rescue.png" alt="张协途中遇险，贫女伸手相救的情境插画"></div><div class="story-copy"><span>第一折 · 落难相救</span><p>张协赴考途中遇险，贫女出手相救，两人的命运由此相连。</p></div></article>
+            <article class="story-card"><div class="story-visual"><span aria-hidden="true">二</span><img src="./assets/prologue/02-marriage.png" alt="贫女与张协患难相依、结为夫妻的情境插画"></div><div class="story-copy"><span>第二折 · 结为夫妻</span><p>患难相依之中，两人结为夫妻；这段恩情成为重逢时无法回避的旧约。</p></div></article>
+            <article class="story-card"><div class="story-visual"><span aria-hidden="true">三</span><img src="./assets/prologue/03-reunion.png" alt="贫女与张协重逢问责的情境插画"></div><div class="story-copy"><span>第三折 · 重逢问责</span><p>多年后再次相遇，贫女追问旧情，唱段从此刻进入最尖锐的冲突。</p></div></article>
+          </div>
         </div>
         <div class="prologue-actions"><button id="skipStory">略过前情，看服饰</button><button class="prologue-primary" id="toCostumes">走近戏中人 <span aria-hidden="true">→</span></button><button class="prologue-quick" id="launchFromStory">略过服饰导览</button></div>
       </div>
@@ -209,6 +210,6 @@
 <audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio>
 <noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript>
 <script src="./config.js"></script>
-<script src="./app.js?v=20261011-page-scroll-v3"></script>
+<script src="./app.js?v=20261011-layout-fix-v4"></script>
 </body>
 </html>
