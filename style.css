@@ -781,3 +781,18 @@ noscript{
 .stage-viewport.portrait .play-markers{position:relative;left:auto;bottom:auto;transform:none;margin:10px auto;width:calc(100% - 24px);max-width:620px}
 @media(max-width:420px){.prologue-topline{font-size:9px;letter-spacing:.12em}.prologue-actions button{flex:1}.prologue-actions .prologue-primary{order:-1;flex-basis:100%}.story-card{grid-template-columns:105px minmax(0,1fr)}.costume-person{align-items:flex-start}.costume-swatch{width:20px;flex-basis:20px;height:34px}.play-markers button b{font-size:9px}.play-markers button small{display:none}}
 @media(prefers-reduced-motion:reduce){.prologue-shade,.prologue-panel,.prologue-step,.story-card{animation:none!important;opacity:1;clip-path:none}}
+.playbill-opening{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;width:100%;aspect-ratio:1.82/1;margin:6px 0 12px;padding:9% 12%;background:url("./assets/prologue/playbill-scroll.png") center/100% 100% no-repeat;isolation:isolate;animation:scroll-unfurl 1.45s cubic-bezier(.18,.72,.18,1) both}
+.playbill-opening:before{content:"";position:absolute;inset:16% 12%;z-index:-1;background:radial-gradient(ellipse,#f2dfb466 0%,#ead5ad22 62%,transparent 100%);pointer-events:none}
+.playbill-opening>span{color:#536043;font-size:clamp(9px,1vw,12px);letter-spacing:.2em;animation:bill-ink .6s 1s both}
+.playbill-opening h2{margin:0;color:#26382b;font-family:"STSong","SimSun",serif;font-size:clamp(24px,4vw,46px);font-weight:500;letter-spacing:.12em;text-align:center;text-shadow:0 1px #f4e3bb88;animation:bill-ink .65s 1.1s both}
+.playbill-opening>p{margin:0;color:#715c3e;font-size:clamp(9px,1vw,12px);letter-spacing:.23em;animation:bill-ink .6s 1.25s both}
+@keyframes scroll-unfurl{0%{opacity:0;transform:perspective(1100px) rotateX(-15deg) scaleY(.08);filter:brightness(.45);clip-path:inset(45% 0)}45%{opacity:1;transform:perspective(1100px) rotateX(3deg) scaleY(.88);filter:brightness(1.25);clip-path:inset(0)}100%{opacity:1;transform:none;filter:none;clip-path:inset(0)}}
+@keyframes bill-ink{from{opacity:0;filter:blur(5px);transform:translateY(4px)}to{opacity:1;filter:none;transform:none}}
+.costume-avatar{display:grid;place-items:center;width:54px;height:54px;flex:0 0 54px;overflow:hidden;border:1px solid #d0b87888;border-radius:50%;background:radial-gradient(circle at 50% 42%,#52634a,#18221c 72%);box-shadow:0 0 18px #0007}
+.costume-avatar img{display:block;width:100%;height:100%;object-fit:contain;object-position:center bottom}
+.stage-caption{display:flex;flex-direction:column;align-items:flex-start;gap:4px;max-width:min(360px,33vw);line-height:1.6}
+.stage-caption strong{color:#e1c48b;font-size:11px;font-weight:500;letter-spacing:.14em}
+.stage-caption span{font-size:10px;letter-spacing:.04em}
+.stage-caption small{color:#aaa18e;font-size:9px;letter-spacing:.04em}
+@media(max-width:760px){.playbill-opening{aspect-ratio:1.68/1;padding:10% 13%;gap:6px;background-size:100% 100%}.playbill-opening h2{font-size:clamp(22px,6vw,30px);letter-spacing:.06em}.playbill-opening>span,.playbill-opening>p{font-size:9px;letter-spacing:.12em}.costume-avatar{width:42px;height:42px;flex-basis:42px}.stage-caption{right:9px;top:auto;bottom:116px;max-width:46vw;padding:6px 8px}.stage-caption strong{font-size:9px}.stage-caption span,.stage-caption small{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.playbill-opening,.playbill-opening>*{animation:none!important;opacity:1;filter:none;clip-path:none}}
