@@ -882,8 +882,8 @@ main{max-width:none;padding:0}
 .prologue-kicker{animation:none;opacity:1}
 .prologue-lead{text-align:center;margin:0 auto 6px;animation:none;opacity:1}
 @keyframes bill-appear-dissolve{0%{opacity:0;filter:blur(9px);transform:translateY(7px)}14%,60%{opacity:1;filter:none;transform:none}100%{opacity:0;filter:blur(11px);transform:translateY(-5px)}}
-.playbill-opening .story-cards{position:absolute;z-index:2;inset:20% 12% 20%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:center;gap:12px}
-.playbill-opening .story-card{height:auto;max-height:100%;display:flex;flex-direction:column;border-color:#5e5d43aa;background:#efe1bbec;box-shadow:0 8px 22px #5d3b2733}
+.playbill-opening .story-cards{position:absolute;z-index:2;inset:20% 12% 20%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:12px}
+.playbill-opening .story-card{height:100%;min-height:0;display:flex;flex-direction:column;border-color:#5e5d43aa;background:#efe1bbec;box-shadow:0 8px 22px #5d3b2733}
 .playbill-opening .story-card>.story-visual{flex:0 0 auto;aspect-ratio:16/9}
 .playbill-opening .story-card>.story-copy{flex:1;padding:10px 12px 12px}
 .playbill-opening .story-card span{color:#77502f;font-size:10px;letter-spacing:.06em}
@@ -924,9 +924,9 @@ main{max-width:none;padding:0}
   .playbill-art{object-fit:fill}
   .bill-intro{inset:20% 14%;gap:5px}
   .bill-intro h2{font-size:clamp(22px,5vw,30px)}
-  .playbill-opening .story-cards{inset:16% 12% 20%;display:flex;align-items:center;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .playbill-opening .story-cards{inset:16% 12% 20%;display:flex;align-items:stretch;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
   .playbill-opening .story-cards::-webkit-scrollbar{display:none}
-  .playbill-opening .story-card{flex:0 0 90%;height:auto;max-height:100%;scroll-snap-align:center}
+  .playbill-opening .story-card{flex:0 0 90%;height:100%;scroll-snap-align:center}
   .playbill-opening .story-card>.story-visual{aspect-ratio:2.2/1}
   .playbill-opening .story-card>.story-copy{padding:6px 8px}
   .playbill-opening .story-card p{font-size:10px;line-height:1.35;margin:3px 0 0}
@@ -965,3 +965,4 @@ main{max-width:none;padding:0}
 @keyframes third-station-reveal{from{opacity:0;filter:blur(5px);transform:translateX(26px)}to{opacity:1;filter:none;transform:none}}
 @media(max-width:760px){.costume-person,.costume-person.is-active{height:88px;min-height:88px;padding:8px;grid-template-columns:64px minmax(0,1fr) 14px;gap:8px}.costume-avatar{width:58px;height:58px;flex-basis:58px}}
 @media(prefers-reduced-motion:reduce){.archive-repertoire.is-entered{animation:none}}
+

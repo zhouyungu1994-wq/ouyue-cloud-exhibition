@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>城中有声 · 水木之间</title>
-<link rel="stylesheet" href="./style.css?v=20261011-layout-fix-v8">
+<link rel="stylesheet" href="./style.css?v=20261011-layout-fix-v9">
 </head>
 <body>
 <header>
@@ -97,7 +97,7 @@
         <h2 id="costumeStepTitle" tabindex="-1">衣着，也在讲述命运</h2>
         <p class="prologue-lead">选择一位人物，看看这版瓯剧如何用舞台服饰提示身份与处境。</p>
         <div class="costume-choices" role="tablist" aria-label="选择人物服饰">
-          <button class="costume-person is-active" id="costumeZhang" role="tab" aria-selected="true" aria-controls="costumeDetail" data-costume="张协"><span class="costume-avatar zhang-avatar" aria-hidden="true"><img src="./assets/rig/zhang-head.png" alt=""></span><span><b>张协</b><small>落魄书生 → 新科状元</small></span><span class="costume-arrow" aria-hidden="true">↗</span></button>
+          <button class="costume-person is-active" id="costumeZhang" role="tab" aria-selected="true" aria-controls="costumeDetail" data-costume="张协"><span class="costume-avatar zhang-avatar" aria-hidden="true"><img src="./assets/rig/zhang-head-v2-128.png" alt=""></span><span><b>张协</b><small>落魄书生 → 新科状元</small></span><span class="costume-arrow" aria-hidden="true">↗</span></button>
           <button class="costume-person" id="costumePinnv" role="tab" aria-selected="false" aria-controls="costumeDetail" data-costume="贫女" tabindex="-1"><span class="costume-avatar pinnv-avatar" aria-hidden="true"><img src="./assets/rig/pinnv-head-v2-128.png" alt=""></span><span><b>贫女</b><small>朴素衣着 · 守信追问</small></span><span class="costume-arrow" aria-hidden="true">↗</span></button>
         </div>
         <article class="costume-detail" id="costumeDetail" role="tabpanel" aria-live="polite" aria-labelledby="costumeZhang">
@@ -165,7 +165,7 @@
       <div class="archive-panel" id="panel-today" role="tabpanel" aria-labelledby="tab-today" hidden>
       <div class="archive-index">03 <i>回响</i></div><div><h3>南戏是源流，瓯剧是后来的地方剧种</h3><p>南戏与瓯剧有关联，但不能直接画等号。瓯剧原名“温州乱弹”，形成于明末清初，1959年定名“瓯剧”，以多种声腔演唱；它吸收、改编南戏剧目，让古老戏文在新的剧种、舞台与观众中继续生活。</p><p>永嘉昆剧（永昆）也以当代演出重新排演《张协状元》。这段唱腔若来自现代演出，应以具体录音版本和演出团体标注；数字戏台插画则是本展的当代视觉表达。</p><a class="archive-source" href="https://wzszw.wenzhou.gov.cn/module/download/downfile.jsp?classid=0&amp;filename=d95bf62c9baf4442867a1ade4e326cf9.pdf" target="_blank" rel="noopener noreferrer">温州年鉴：瓯剧沿革 ↗</a><br><a class="archive-source" href="https://www.neac.gov.cn/seac/xwzx/202601/1186679.shtml" target="_blank" rel="noopener noreferrer">当代瓯剧《张协状元》演出介绍 ↗</a></div>
     </div>
-      <p class="page-cue">向下滚动 · 继续浏览 <span aria-hidden="true">↓</span></p>
+      <p class="page-cue" id="archiveContinueCue">向下滚动 · 继续浏览 <span aria-hidden="true">↓</span></p>
     </section>
     <section class="archive-page archive-repertoire" id="archiveRepertoire" aria-labelledby="repertoireTitle">
     <section class="repertoire" aria-labelledby="repertoireTitle">
@@ -210,6 +210,7 @@
 <audio id="audio" preload="metadata" src="./assets/excerpt.mp3"></audio>
 <noscript>本页需要开启 JavaScript 才能体验开帘与音频交互。</noscript>
 <script src="./config.js"></script>
-<script src="./app.js?v=20261011-layout-fix-v6"></script>
+<script src="./app.js?v=20261011-layout-fix-v7"></script>
 </body>
 </html>
+
