@@ -958,6 +958,7 @@ main{max-width:none;padding:0}
 .costume-person.is-active{border-color:#d3a96f;box-shadow:none;background:linear-gradient(100deg,#9c74402a,#111a16 70%)}
 .costume-person:focus:not(:focus-visible){outline:none}
 .costume-person[aria-selected="true"]:focus-visible{outline:none}
+#costumeStepTitle:focus-visible{outline:none}
 .costume-avatar{width:68px;height:68px;flex-basis:68px;margin:0 auto;overflow:hidden;border:1px solid #d0b87888;border-radius:50%;background:radial-gradient(circle at 50% 42%,#52634a,#18221c 72%);box-shadow:0 0 18px #0007}
 .costume-avatar img,.costume-avatar.zhang-avatar img,.costume-avatar.pinnv-avatar img{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;object-position:center;transform:none}
 .archive-repertoire.is-entered{animation:third-station-reveal .9s cubic-bezier(.2,.7,.25,1) both}
